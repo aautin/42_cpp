@@ -3,24 +3,30 @@ NAME:= phonebook
 CC:= c++
 CFLAGS:= -Werror -Wall -Wextra -std=c++98
 
-INC:= .
-SRC:= \
+SRC_PATH:= src/
+OBJ_PATH:= obj/
 
-OBJ:= $(SRC:.cpp=.o)
+INC := .
+SRC := Contact PhoneBook
+SRC := $(addsuffix .cpp, $(addprefix src/, $(SRC)))
+OBJ := $(SRC:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 
 all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 debug: CFLAGS += -g3
 debug: $(NAME)
 
-%.o: %.cpp
+$(NAME): $(OBJ_PATH) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+$(OBJ_PATH):
+	@mkdir obj
+
+obj/%.o: src/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
 	rm -f $(NAME)
