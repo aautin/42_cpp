@@ -5,9 +5,9 @@ CFLAGS:= -Werror -Wall -Wextra -std=c++98
 
 SRC_PATH:= src/
 OBJ_PATH:= obj/
+INC_PATH := inc/
 
-INC := .
-SRC := Contact PhoneBook
+SRC := Contact PhoneBook main
 SRC := $(addsuffix .cpp, $(addprefix src/, $(SRC)))
 OBJ := $(SRC:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 
@@ -23,7 +23,7 @@ $(OBJ_PATH):
 	@mkdir obj
 
 obj/%.o: src/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PATH)
 
 clean:
 	rm -rf $(OBJ_PATH)
