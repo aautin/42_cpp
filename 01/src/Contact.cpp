@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/07/30 21:13:51 by aautin           ###   ########.fr       */
+/*   Updated: 2024/07/31 02:58:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,57 @@
 
 #include "Contact.hpp"
 
+/* Constructor-Destructor */
 Contact::Contact(void)
 {
-	std::cout << "Contact constructed" << std::endl;
-	
+	firstName = "Rick";
+	lastName = "Astley";
+	nickName = "Dick Spatsley";
+	phoneNumber = 7271987;
+	darkestSecret = "Never Gonna Give You Up";
+}
+Contact::~Contact(void) {}
+
+/* Setters */
+void Contact::setFirstName(std::string &firstName)
+{
+	this->firstName = firstName;
+}
+void Contact::setLastName(std::string &lastName)
+{
+	this->lastName = lastName;
+}
+void Contact::setNickName(std::string &nickName)
+{
+	this->nickName = nickName;
+}
+void Contact::setPhoneNumber(__int64_t &phoneNumber)
+{
+	this->phoneNumber = phoneNumber;
+}
+void Contact::setDarkestSecret(std::string &darkestSecret)
+{
+	this->darkestSecret = darkestSecret;
 }
 
-Contact::Contact(std::string const &firstName, std::string const &lastName,
-				std::string const &nickName, std::string const &phoneNumber,
-				std::string const &darkestSecret)
+/* Getters */
+std::string Contact::getFirstName() const
 {
-	std::cout << "Contact constructed but differently" << std::endl;
-	
+	return firstName;
 }
-
-Contact::~Contact(void)
+std::string Contact::getLastName() const
 {
-	std::cout << "Contact destructed" << std::endl;
+	return lastName;
+}
+std::string Contact::getNickName() const
+{
+	return nickName;	
+}
+__int64_t Contact::getPhoneNumber() const
+{
+	return phoneNumber;
+}
+std::string Contact::getDarkestSecret() const
+{
+	return darkestSecret;
 }
