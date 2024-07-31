@@ -6,11 +6,9 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/07/31 02:58:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/07/31 22:43:18 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <iostream>
 
 #include "Contact.hpp"
 
@@ -25,27 +23,29 @@ Contact::Contact(void)
 }
 Contact::~Contact(void) {}
 
+
 /* Setters */
-void Contact::setFirstName(std::string &firstName)
+void Contact::setFirstName(std::string &newFirstName)
 {
-	this->firstName = firstName;
+	this->firstName = newFirstName;
 }
-void Contact::setLastName(std::string &lastName)
+void Contact::setLastName(std::string &newLastName)
 {
-	this->lastName = lastName;
+	this->lastName = newLastName;
 }
-void Contact::setNickName(std::string &nickName)
+void Contact::setNickName(std::string &newNickName)
 {
-	this->nickName = nickName;
+	this->nickName = newNickName;
 }
-void Contact::setPhoneNumber(__int64_t &phoneNumber)
+void Contact::setDarkestSecret(std::string &newDarkestSecret)
 {
-	this->phoneNumber = phoneNumber;
+	this->darkestSecret = newDarkestSecret;
 }
-void Contact::setDarkestSecret(std::string &darkestSecret)
+void Contact::setPhoneNumber(long newPhoneNumber)
 {
-	this->darkestSecret = darkestSecret;
+	this->phoneNumber = newPhoneNumber;
 }
+
 
 /* Getters */
 std::string Contact::getFirstName() const
@@ -60,11 +60,11 @@ std::string Contact::getNickName() const
 {
 	return nickName;	
 }
-__int64_t Contact::getPhoneNumber() const
-{
-	return phoneNumber;
-}
 std::string Contact::getDarkestSecret() const
 {
 	return darkestSecret;
+}
+long Contact::getPhoneNumber() const
+{
+	return phoneNumber;
 }
