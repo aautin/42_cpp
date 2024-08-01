@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:19:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 00:20:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 01:01:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 void 		printField(std::string field);
 void		printLine(char const *line);
 void		printInvalid(int trialNumber, char const *invalidType);
-std::string	readLine(char *prompt);
+std::string	readLine(char const *prompt);
 
 #endif
