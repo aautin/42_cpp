@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:18:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/01 03:29:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/01 22:09:13 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class PhoneBook
 		/* Variables */
 		Contact		*contacts[MAX_CONTACTS_NBR];
 		int			contactsNumber;
+		int			consecutiveFailsNumber;
 
 	public:
 		/* Constructor-Destructor */
@@ -29,8 +30,10 @@ class PhoneBook
 		/* Setters */
 		void	setContact(Contact *newContact);
 		void	setContactsNumber(int newContactsNumber);
+		void	setConsecutiveFailsNumber(int newConsecutiveFailsNumber);
 
 		/* Getters */
 		Contact		*getContact(int contactIndex) const;
 		int			getContactsNumber() const;
+		int			getConsecutiveFailsNumber() const;
 };

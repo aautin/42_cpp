@@ -12,9 +12,9 @@ Firstname> Rick
 Lastname> Astley
 Nickname> Dick Spatsley
 Phone number> 
-Invalid content (1/3), try again .
+Invalid content (1/3). Try again.
 Phone number> 
-Invalid content (2/3), try again .
+Invalid content (2/3). Try again.
 Phone number> 
 Invalid content (3/3).
 *********************************************
@@ -40,7 +40,19 @@ Phone number: 7271987
 Darkest secret: Never Gonna Give You Up
 *********************************************
 Phonebook> qwoiru
-Invalid command.
+Invalid command (1/3). Try again.
+Phonebook> qwoiru
+Invalid command (2/3). Try again.
+Phonebook> qwoiru
+Invalid command (3/3).
+*********************************************
+
+
+
+*********************************************
+Phonebook> SEARCH
+*********************************************
+|          |          |          |          |
 *********************************************
 Phonebook> EXIT
 *********************************************
