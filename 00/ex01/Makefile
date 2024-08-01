@@ -7,7 +7,7 @@ SRC_PATH:= src/
 OBJ_PATH:= obj/
 INC_PATH := inc/
 
-SRC := Contact PhoneBook main
+SRC := Contact PhoneBook main userInterface
 SRC := $(addsuffix .cpp, $(addprefix src/, $(SRC)))
 OBJ := $(SRC:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 

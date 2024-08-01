@@ -6,39 +6,41 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:48:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/01 03:41:15 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/01 23:38:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
+#include <cstdlib>
 #include <iostream>
 
 #include "PhoneBook.hpp"
+#include "userInterface.hpp"
 
-static void printContactVariables(Contact *contact)
-{
-	if (contact == NULL) {
-		std::cout << ">>----NULL-----<<" << std::endl;
-		return ;
-	}
-
-	std::cout << ">>---------------" << std::endl;
-	std::cout << "Firstname : " << contact->getFirstName() << std::endl;
-	std::cout << "Lastname : " << contact->getLastName() << std::endl;
-	std::cout << "Nickname : " << contact->getNickName() << std::endl;
-	std::cout << "Phone number : " << contact->getPhoneNumber() << std::endl;
-	std::cout << "Darkest secret : " << contact->getDarkestSecret() << std::endl;
-	std::cout << "---------------<<" << std::endl;
-}
-
-int	main(void)
+int main(void)
 {
 	PhoneBook	phoneBook;
 
-	for (int i = 0; i < MAX_CONTACTS_NBR + 2; i++)
-		phoneBook.setContact(new Contact());
-
-	for (int i = 0; i < MAX_CONTACTS_NBR; i++) {
-		phoneBook.getContact(i)->setPhoneNumber(i);
-		printContactVariables(phoneBook.getContact(i));
+	printLine(EDGE);
+	while (true) {
+		std::string command = readLine("Phonebook");
+		if (command.compare("SEARCH") == 0)
+			phoneBook.search(0);
+		else if (command.compare("ADD") == 0)
+			phoneBook.add(0);
+		else if (command.compare("EXIT") == 0)
+			break ;
+		else {
+			int failsNumber = phoneBook.getConsecutiveFailsNumber();
+			if (failsNumber == 2) {
+				printInvalid(3, "command");
+				break ;
+			}
+			printInvalid(failsNumber + 1, "command");
+			phoneBook.setConsecutiveFailsNumber(failsNumber + 1);
+		}
 	}
+	printLine(EDGE);
+	return EXIT_SUCCESS;
 }

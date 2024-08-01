@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:18:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/01 22:09:13 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/01 23:36:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ class PhoneBook
 		Contact		*getContact(int contactIndex) const;
 		int			getContactsNumber() const;
 		int			getConsecutiveFailsNumber() const;
+
+		/* Algorithm */
+		void	printContacts() const;
+		void	search(int consecutiveFails);
+		void	add(int consecutiveFails);
 };

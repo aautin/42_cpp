@@ -6,11 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/01 03:25:13 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 00:14:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include "userInterface.hpp"
+
+#include <iostream>
 
 /* Constructor-Destructor */
 Contact::Contact(void)
@@ -67,4 +70,21 @@ std::string Contact::getDarkestSecret() const
 long Contact::getPhoneNumber() const
 {
 	return phoneNumber;
+}
+
+
+/* Others */
+void	Contact::searchContact(int contactIndex) const
+{
+	std::cout << "|         " << contactIndex << "|";
+	printField(this->getFirstName());
+	std::cout << "|";
+	printField(this->getLastName());
+	std::cout << "|";
+	printField(this->getNickName());
+	std::cout << "|" << std::endl;
+}
+void	Contact::printContact() const
+{
+	
 }

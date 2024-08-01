@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 20:52:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/01 22:09:38 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 00:15:52 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
 #include "PhoneBook.hpp"
+#include "userInterface.hpp"
 
 /* Constructor-Destructor */
 PhoneBook::PhoneBook(void)
@@ -51,8 +52,9 @@ void	PhoneBook::setContactsNumber(int newContactsNumber)
 }
 void	PhoneBook::setConsecutiveFailsNumber(int newConsecutiveFailsNumber)
 {
-	this->consecutiveFailsNumber = consecutiveFailsNumber;
+	this->consecutiveFailsNumber = newConsecutiveFailsNumber;
 }
+
 
 /* Getters */
 Contact	*PhoneBook::getContact(int contactIndex) const
@@ -66,4 +68,33 @@ int		PhoneBook::getContactsNumber() const
 int		PhoneBook::getConsecutiveFailsNumber() const
 {
 	return this->consecutiveFailsNumber;
+}
+
+
+/* Algorithm */
+void	PhoneBook::printContacts() const
+{
+	int	contactsNumber = this->getContactsNumber();
+	if (contactsNumber == 0) {
+		printLine("No contact found.");
+		printLine(EDGE);
+		return ;
+	}
+
+	printLine(EDGE);
+	for (int i = 0; i < contactsNumber; i++) {
+		this->contacts[i]->searchContact(i);
+	}
+	printLine(EDGE);
+}
+void	PhoneBook::search(int consecutiveFails)
+{
+	printContacts();
+	this->setConsecutiveFailsNumber(consecutiveFails);
+	return ;
+}
+void	PhoneBook::add(int consecutiveFails)
+{
+	this->setConsecutiveFailsNumber(consecutiveFails);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:12:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/07/31 22:41:57 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 00:07:38 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,8 @@ class Contact
 		std::string		getNickName() const;
 		std::string		getDarkestSecret() const;
 		long			getPhoneNumber() const;
+
+		/* Others */
+		void	searchContact(int contactIndex) const;
+		void	printContact() const;
 };
