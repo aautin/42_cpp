@@ -6,11 +6,9 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:18:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/07/31 22:46:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/01 03:29:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <list>
 
 #include "Contact.hpp"
 
@@ -20,7 +18,7 @@ class PhoneBook
 {
 	private:
 		/* Variables */
-		Contact		contacts[MAX_CONTACTS_NBR];
+		Contact		*contacts[MAX_CONTACTS_NBR];
 		int			contactsNumber;
 
 	public:
@@ -29,10 +27,10 @@ class PhoneBook
 		~PhoneBook(void);
 
 		/* Setters */
-		void	setContact(Contact newContact);
+		void	setContact(Contact *newContact);
 		void	setContactsNumber(int newContactsNumber);
 
 		/* Getters */
-		Contact		getContact(int contactIndex) const;
-		int			getContactsNumber();
+		Contact		*getContact(int contactIndex) const;
+		int			getContactsNumber() const;
 };
