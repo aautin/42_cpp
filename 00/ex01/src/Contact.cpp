@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 00:14:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 18:20:09 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include "userInterface.hpp"
 
+#include <cstdio>
 #include <iostream>
 
 /* Constructor-Destructor */
@@ -21,7 +22,7 @@ Contact::Contact(void)
 	firstName = "Rick";
 	lastName = "Astley";
 	nickName = "Dick Spatsley";
-	phoneNumber = 7271987;
+	phoneNumber = "+44 7271987";
 	darkestSecret = "Never Gonna Give You Up";
 }
 Contact::~Contact(void) {}
@@ -44,7 +45,7 @@ void Contact::setDarkestSecret(std::string &newDarkestSecret)
 {
 	this->darkestSecret = newDarkestSecret;
 }
-void Contact::setPhoneNumber(long newPhoneNumber)
+void Contact::setPhoneNumber(std::string &newPhoneNumber)
 {
 	this->phoneNumber = newPhoneNumber;
 }
@@ -67,7 +68,7 @@ std::string Contact::getDarkestSecret() const
 {
 	return darkestSecret;
 }
-long Contact::getPhoneNumber() const
+std::string Contact::getPhoneNumber() const
 {
 	return phoneNumber;
 }
@@ -86,5 +87,9 @@ void	Contact::searchContact(int contactIndex) const
 }
 void	Contact::printContact() const
 {
-	
+	printLine("Firstname: ", this->getFirstName().c_str());
+	printLine("Lastname: ", this->getLastName().c_str());
+	printLine("Nickname: ", this->getNickName().c_str());
+	printLine("Phone number: ", this->getPhoneNumber().c_str());
+	printLine("Darkest secret: ", this->getDarkestSecret().c_str());
 }

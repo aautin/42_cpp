@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:19:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 01:01:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:52:58 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@
 # define FIELD_SIZE 10
 
 void 		printField(std::string field);
-void		printLine(char const *line);
+void		printLine(char const *fieldName, char const *line);
 void		printInvalid(int trialNumber, char const *invalidType);
 std::string	readLine(char const *prompt);
+
+/* Parsing (ADD command) */
+bool		isValidName(std::string const &name);
+bool		isNotEmptyString(std::string const &name);
+bool		isValidPhoneNumber(std::string const &phoneNumber);
 
 #endif

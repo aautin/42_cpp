@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 20:52:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 01:07:13 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 21:53:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ PhoneBook::PhoneBook(void)
 	for (int i = 1; i < MAX_CONTACTS_NBR; i++)
 		this->contacts[i] = NULL;
 	this->contactsNumber = 1;
-	this->consecutiveFailsNumber = 0;
 }
 PhoneBook::~PhoneBook(void) {
 	for (int i = 0; i < MAX_CONTACTS_NBR; i++)
@@ -51,10 +50,6 @@ void	PhoneBook::setContactsNumber(int newContactsNumber)
 {
 	this->contactsNumber = newContactsNumber;
 }
-void	PhoneBook::setConsecutiveFailsNumber(int newConsecutiveFailsNumber)
-{
-	this->consecutiveFailsNumber = newConsecutiveFailsNumber;
-}
 
 
 /* Getters */
@@ -66,42 +61,88 @@ int		PhoneBook::getContactsNumber() const
 {
 	return this->contactsNumber;
 }
-int		PhoneBook::getConsecutiveFailsNumber() const
-{
-	return this->consecutiveFailsNumber;
-}
 
 
 /* Algorithm */
-void	PhoneBook::printContacts() const
+void	PhoneBook::printBook() const
 {
 	int	contactsNumber = this->getContactsNumber();
 
-	printLine(EDGE);
 	for (int i = 0; i < contactsNumber; i++)
 		this->contacts[i]->searchContact(i);
-	printLine(EDGE);
+	printLine(NULL, EDGE);
 }
 void	PhoneBook::search(int consecutiveFails)
 {
-	if (this->getContactsNumber() != 0) {
-		if (consecutiveFails == 0)
-			printContacts();
-		std::string index = readLine("Contact index");
-		if (index.length() > 1 || !('0' <= index[0] && index[0] <= this->getContactsNumber() + '0' - 1)) {
-			printInvalid(consecutiveFails + 1, "index");
-			this->search(consecutiveFails + 1);
-		}
-		else
-			this->contacts[index[0] - '0']->printContact();
+	if (consecutiveFails == 0) {
+		printLine(NULL, EDGE);
+		printBook();
+	}
+
+	std::string index = readLine("Contact index");
+	if (index.length() > 1
+		|| !('0' <= index[0] && index[0] < this->getContactsNumber() + '0')) {
+		printInvalid(++consecutiveFails, "index");
+		if (consecutiveFails < 3)
+			this->search(consecutiveFails);
 	}
 	else
-		printLine("No contact found.");
-	printLine(EDGE);
+		this->contacts[index[0] - '0']->printContact();
 	return ;
 }
-void	PhoneBook::add(int consecutiveFails)
+typedef bool (*ValidationFunction)(const std::string&);
+void	PhoneBook::add(Contact *newContact)
 {
-	this->setConsecutiveFailsNumber(consecutiveFails);
+	printLine(NULL, EDGE);
+
+	char prompts[5][20] = {"Firstname", "Lastname", "Nickname",
+		"Phone number", "Darkest secret"};
+	ValidationFunction functions[5] = {&isValidName, &isValidName, &isValidName,
+		&isValidPhoneNumber, &isNotEmptyString};
+
+	std::string	input;
+	for (int i = 0; i < 5; i++) {
+		int consecutiveFails = 0;
+		while (consecutiveFails < 3) {
+			input = readLine(prompts[i]);
+			if (!functions[i](input)) {
+				printInvalid(++consecutiveFails, "content");
+				if (consecutiveFails == 3) {
+					delete newContact;
+					return ;
+				}
+			}
+			else
+				break ;
+		}
+	}
+
+	this->setContact(newContact);
 	return ;
+}
+void	PhoneBook::command(int consecutiveFails)
+{
+	if (consecutiveFails == 0)
+		printLine(NULL, EDGE);
+
+	std::string command = readLine("Phonebook");
+	if (command.compare("SEARCH") == 0) {
+		if (this->getContactsNumber() != 0)
+			this->search(0);
+		else
+			printLine(NULL, "No contact found.");
+	}
+	else if (command.compare("ADD") == 0)
+		this->add(new Contact);
+	else if (command.compare("EXIT") == 0)
+		return ;
+	else {
+		printInvalid(++consecutiveFails, "command");
+		if (consecutiveFails == 3)
+			return ;
+		this->command(consecutiveFails);
+		return ;
+	}
+
+	this->command(0);
 }

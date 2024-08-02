@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:48:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 01:01:29 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/02 22:05:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void printField(std::string field)
 	std::cout << field;
 }
 
-void printLine(char const *line)
+void printLine(char const *fieldName, char const *line)
 {
+	const std::string FIELDNAME_COLOR = "\033[34m";
+	const std::string DEFAULT_COLOR = "\033[0m";
+	
+	if (fieldName != NULL)
+		std::cout << FIELDNAME_COLOR << fieldName << DEFAULT_COLOR;
 	std::cout << line << std::endl;
 }
 
@@ -46,8 +51,60 @@ std::string readLine(char const *prompt)
 	std::cout << PROMPT_COLOR << prompt << DEFAULT_COLOR << " ➡️  ";
 
 	std::string line;
-	std::cin >> line;
-	if (std::cin.eof())
-		std::cout << std::endl;
+	std::getline(std::cin, line);
 	return line;
+}
+
+
+/* Parsing (ADD command) */
+static int	isSeparator(std::string const name, int separatorI)
+{
+	if (name[separatorI] != ' ' && name[separatorI] != '-')
+		return false;
+
+	if (name[separatorI + 1] == '\0')
+		return false;
+
+	if (!isalpha(name[separatorI - 1]) || !isalpha(name[separatorI + 1]))
+		return false;
+
+	return true;
+}
+bool	isValidName(std::string const &name)
+{
+	if (name.empty() || !isalpha(name[0]))
+		return false;
+
+	for (int i = 1; name[i]; i++) {
+		if (!islower(name[i]))
+			if (!isSeparator(name, i++))
+				return false;
+	}
+	return true;
+}
+bool	isNotEmptyString(std::string const &name)
+{
+	return !name.empty();
+}
+bool	isValidPhoneNumber(std::string const &phoneNumber)
+{
+	/* Country code (+33 ) is optional */
+	int i = 0;
+	if (phoneNumber[0] == '+') {
+		i++;
+		while (phoneNumber[i] && phoneNumber[i] != ' ')
+			i++;
+		if (phoneNumber[i] != '\0')
+			i++;
+	}
+
+	/* Local code (06********) is mandatory */
+	int j;
+	for (j = 0; phoneNumber[i + j]; j++) {
+		if (!isdigit(phoneNumber[i + j]))
+			return false;
+	}
+
+	/* Check country and local codes lenght */	
+	return (i == 0 || (3 <= i && i <= 5)) && (7 <= j && j <= 12);
 }
