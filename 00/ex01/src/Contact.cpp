@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 18:20:09 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/03 21:11:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ Contact::~Contact(void) {}
 
 
 /* Setters */
-void Contact::setFirstName(std::string &newFirstName)
+void Contact::setFirstName(std::string const &newFirstName)
 {
 	this->firstName = newFirstName;
 }
-void Contact::setLastName(std::string &newLastName)
+void Contact::setLastName(std::string const &newLastName)
 {
 	this->lastName = newLastName;
 }
-void Contact::setNickName(std::string &newNickName)
+void Contact::setNickName(std::string const &newNickName)
 {
 	this->nickName = newNickName;
 }
-void Contact::setDarkestSecret(std::string &newDarkestSecret)
-{
-	this->darkestSecret = newDarkestSecret;
-}
-void Contact::setPhoneNumber(std::string &newPhoneNumber)
+void Contact::setPhoneNumber(std::string const &newPhoneNumber)
 {
 	this->phoneNumber = newPhoneNumber;
+}
+void Contact::setDarkestSecret(std::string const &newDarkestSecret)
+{
+	this->darkestSecret = newDarkestSecret;
 }
 
 
@@ -64,13 +64,13 @@ std::string Contact::getNickName() const
 {
 	return nickName;	
 }
-std::string Contact::getDarkestSecret() const
-{
-	return darkestSecret;
-}
 std::string Contact::getPhoneNumber() const
 {
 	return phoneNumber;
+}
+std::string Contact::getDarkestSecret() const
+{
+	return darkestSecret;
 }
 
 

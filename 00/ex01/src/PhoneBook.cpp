@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 20:52:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 21:53:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/03 21:10:36 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 /* Constructor-Destructor */
 PhoneBook::PhoneBook(void)
 {
-	this->contacts[0] = new Contact;
-	for (int i = 1; i < MAX_CONTACTS_NBR; i++)
-		this->contacts[i] = NULL;
-	this->contactsNumber = 1;
+	for (int i = 0; i < MAX_CONTACTS_NBR; i++)
+		this->contacts[i] = new Contact;
+	this->contactsNumber = 8;
 }
 PhoneBook::~PhoneBook(void) {
 	for (int i = 0; i < MAX_CONTACTS_NBR; i++)
@@ -90,30 +89,32 @@ void	PhoneBook::search(int consecutiveFails)
 		this->contacts[index[0] - '0']->printContact();
 	return ;
 }
-typedef bool (*ValidationFunction)(const std::string&);
 void	PhoneBook::add(Contact *newContact)
 {
 	printLine(NULL, EDGE);
 
 	char prompts[5][20] = {"Firstname", "Lastname", "Nickname",
 		"Phone number", "Darkest secret"};
-	ValidationFunction functions[5] = {&isValidName, &isValidName, &isValidName,
+	bool (*isValid[5])(std::string const &) = {&isValidName, &isValidName, &isValidName,
 		&isValidPhoneNumber, &isNotEmptyString};
+	void (Contact::*set[5])(std::string const &) = {&Contact::setFirstName, &Contact::setLastName,
+		&Contact::setNickName, &Contact::setPhoneNumber, &Contact::setDarkestSecret};
 
-	std::string	input;
 	for (int i = 0; i < 5; i++) {
 		int consecutiveFails = 0;
 		while (consecutiveFails < 3) {
-			input = readLine(prompts[i]);
-			if (!functions[i](input)) {
+			std::string input = readLine(prompts[i]);
+			if (!isValid[i](input)) {
 				printInvalid(++consecutiveFails, "content");
 				if (consecutiveFails == 3) {
 					delete newContact;
 					return ;
 				}
 			}
-			else
+			else {
+				(newContact->*set[i])(input);
 				break ;
+			}
 		}
 	}
 

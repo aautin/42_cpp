@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:12:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 18:26:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/03 21:09:27 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ class Contact
 		~Contact(void);
 
 		/* Setters */
-		void	setFirstName(std::string &newFirstName);
-		void	setLastName(std::string &newLastName);
-		void	setNickName(std::string &newNickName);
-		void	setDarkestSecret(std::string &newDarkestSecret);
-		void	setPhoneNumber(std::string &newPhoneNumber);
+		void	setFirstName(std::string const &newFirstName);
+		void	setLastName(std::string const &newLastName);
+		void	setNickName(std::string const &newNickName);
+		void	setDarkestSecret(std::string const &newDarkestSecret);
+		void	setPhoneNumber(std::string const &newPhoneNumber);
 
 		/* Getters */
 		std::string		getFirstName() const;
