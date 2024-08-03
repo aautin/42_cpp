@@ -8,7 +8,7 @@ OBJ_PATH:= obj/
 INC_PATH := inc/
 
 SRC := Contact PhoneBook main userInterface
-SRC := $(addsuffix .cpp, $(addprefix src/, $(SRC)))
+SRC := $(addsuffix .cpp, $(addprefix $(SRC_PATH), $(SRC)))
 OBJ := $(SRC:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 
 all: $(NAME)
@@ -22,7 +22,7 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 $(OBJ_PATH):
 	@mkdir obj
 
-obj/%.o: src/%.cpp
+$(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PATH)
 
 clean:
