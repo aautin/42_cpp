@@ -6,12 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:19:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/02 21:52:58 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 03:05:37 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef USER_INTERFACE_H
-# define USER_INTERFACE_H
+#ifndef USER_INTERFACE_HPP
+# define USER_INTERFACE_HPP
 
 # include <string>
 

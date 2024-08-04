@@ -6,13 +6,16 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:18:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 02:02:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 03:06:43 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.hpp"
+#ifndef PHONE_BOOK_HPP
+# define PHONE_BOOK_HPP
 
-#define MAX_CONTACTS_NBR 8
+# include "Contact.hpp"
+
+# define MAX_CONTACTS_NBR 8
 
 class PhoneBook
 {
@@ -40,3 +43,5 @@ class PhoneBook
 		void	search(int consecutiveFails);
 		void	add();
 };
+
+#endif

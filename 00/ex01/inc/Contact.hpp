@@ -6,11 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:12:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/03 21:09:27 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 03:06:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
+
+# include <string>
 
 class Contact
 {
@@ -45,3 +48,5 @@ class Contact
 		void	searchContact(int contactIndex) const;
 		void	printContact() const;
 };
+
+#endif

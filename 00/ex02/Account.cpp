@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 21:20:26 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/03 23:16:38 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 03:07:19 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-
 
 /* Static Member Variables */
 int	Account::_nbAccounts = 0;
