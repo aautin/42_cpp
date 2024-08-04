@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:30:53 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 18:09:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 21:18:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class HumanB
 		~HumanB();
 
 		/* Others */
-		void setWeapon(Weapon weapon);
+		void setWeapon(Weapon &weapon);
 		void attack() const;
 };
 

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:45:40 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 18:09:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 21:19:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ HumanB::~HumanB() {}
 
 
 /* Others */
-void HumanB::setWeapon(Weapon weapon)
+void HumanB::setWeapon(Weapon &weapon)
 {
 	this->weapon = &weapon;
 }
