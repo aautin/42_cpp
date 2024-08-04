@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 20:52:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/03 21:10:36 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 02:03:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,24 @@
 #include "PhoneBook.hpp"
 #include "userInterface.hpp"
 
+
 /* Constructor-Destructor */
 PhoneBook::PhoneBook(void)
 {
-	for (int i = 0; i < MAX_CONTACTS_NBR; i++)
-		this->contacts[i] = new Contact;
 	this->contactsNumber = 8;
 }
-PhoneBook::~PhoneBook(void) {
-	for (int i = 0; i < MAX_CONTACTS_NBR; i++)
-		delete this->contacts[i];
-}
+PhoneBook::~PhoneBook(void) {}
 
 
 /* Setters */
-void	PhoneBook::setContact(Contact *newContact)
+void	PhoneBook::setContact(Contact newContact)
 {
 	int contactsNumber = this->getContactsNumber();
 
 	if (contactsNumber != MAX_CONTACTS_NBR)
 		setContactsNumber(contactsNumber + 1);
-	else {
-		delete this->contacts[MAX_CONTACTS_NBR - 1];
+	else
 		contactsNumber--;
-	}
 
 	for (int i = contactsNumber - 1; i >= 0; i--)
 		this->contacts[i + 1] = this->contacts[i];
@@ -52,7 +46,7 @@ void	PhoneBook::setContactsNumber(int newContactsNumber)
 
 
 /* Getters */
-Contact	*PhoneBook::getContact(int contactIndex) const
+Contact	PhoneBook::getContact(int contactIndex) const
 {
 	return this->contacts[contactIndex];
 }
@@ -63,19 +57,13 @@ int		PhoneBook::getContactsNumber() const
 
 
 /* Algorithm */
-void	PhoneBook::printBook() const
-{
-	int	contactsNumber = this->getContactsNumber();
-
-	for (int i = 0; i < contactsNumber; i++)
-		this->contacts[i]->searchContact(i);
-	printLine(NULL, EDGE);
-}
 void	PhoneBook::search(int consecutiveFails)
 {
 	if (consecutiveFails == 0) {
 		printLine(NULL, EDGE);
-		printBook();
+		for (int i = 0; i < getContactsNumber(); i++)
+			this->contacts[i].searchContact(i);
+		printLine(NULL, EDGE);
 	}
 
 	std::string index = readLine("Contact index");
@@ -86,12 +74,14 @@ void	PhoneBook::search(int consecutiveFails)
 			this->search(consecutiveFails);
 	}
 	else
-		this->contacts[index[0] - '0']->printContact();
+		this->contacts[index[0] - '0'].printContact();
 	return ;
 }
-void	PhoneBook::add(Contact *newContact)
+void	PhoneBook::add()
 {
 	printLine(NULL, EDGE);
+
+	Contact newContact;
 
 	char prompts[5][20] = {"Firstname", "Lastname", "Nickname",
 		"Phone number", "Darkest secret"};
@@ -107,12 +97,11 @@ void	PhoneBook::add(Contact *newContact)
 			if (!isValid[i](input)) {
 				printInvalid(++consecutiveFails, "content");
 				if (consecutiveFails == 3) {
-					delete newContact;
 					return ;
 				}
 			}
 			else {
-				(newContact->*set[i])(input);
+				(newContact.*set[i])(input);
 				break ;
 			}
 		}
@@ -121,7 +110,7 @@ void	PhoneBook::add(Contact *newContact)
 	this->setContact(newContact);
 	return ;
 }
-void	PhoneBook::command(int consecutiveFails)
+void	PhoneBook::getCommand(int consecutiveFails)
 {
 	if (consecutiveFails == 0)
 		printLine(NULL, EDGE);
@@ -134,16 +123,16 @@ void	PhoneBook::command(int consecutiveFails)
 			printLine(NULL, "No contact found.");
 	}
 	else if (command.compare("ADD") == 0)
-		this->add(new Contact);
+		this->add();
 	else if (command.compare("EXIT") == 0)
 		return ;
 	else {
 		printInvalid(++consecutiveFails, "command");
 		if (consecutiveFails == 3)
 			return ;
-		this->command(consecutiveFails);
+		this->getCommand(consecutiveFails);
 		return ;
 	}
 
-	this->command(0);
+	this->getCommand(0);
 }

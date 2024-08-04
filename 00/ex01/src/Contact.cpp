@@ -6,15 +6,15 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:32:38 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/03 21:11:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 02:00:20 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <iostream>
 
 #include "Contact.hpp"
 #include "userInterface.hpp"
 
-#include <cstdio>
-#include <iostream>
 
 /* Constructor-Destructor */
 Contact::Contact(void)

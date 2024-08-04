@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:18:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/03 20:56:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 02:02:48 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class PhoneBook
 {
 	private:
 		/* Variables */
-		Contact		*contacts[MAX_CONTACTS_NBR];
+		Contact		contacts[MAX_CONTACTS_NBR];
 		int			contactsNumber;
 
 	public:
@@ -27,16 +27,16 @@ class PhoneBook
 		~PhoneBook(void);
 
 		/* Setters */
-		void	setContact(Contact *newContact);
+		void	setContact(Contact newContact);
 		void	setContactsNumber(int newContactsNumber);
 
 		/* Getters */
-		Contact		*getContact(int contactIndex) const;
+		Contact		getContact(int contactIndex) const;
 		int			getContactsNumber() const;
 
 		/* Algorithm */
 		void	printBook() const;
-		void	command(int consecutiveFails);
+		void	getCommand(int consecutiveFails);
 		void	search(int consecutiveFails);
-		void	add(Contact *newContact);
+		void	add();
 };
