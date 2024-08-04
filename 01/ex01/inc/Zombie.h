@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 02:47:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 03:37:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 04:05:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include "Zombie.hpp"
 
-Zombie*	newZombie( std::string name );
 Zombie* zombieHorde( int N, std::string name );
 
 #endif

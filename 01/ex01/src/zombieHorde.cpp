@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 03:38:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 03:43:08 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/04 04:15:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,14 @@
 #include "Zombie.h"
 #include "Zombie.hpp"
 
-
-Zombie*	newZombie( std::string name )
-{
-	Zombie *zombie = new Zombie;
-	zombie->setName(name);
-	return zombie;
-}
 Zombie* zombieHorde( int N, std::string name )
 {
-	Zombie	*horde[N];
+	Zombie	*horde = new Zombie[N];
 
 	for (int i = 0; i < N; i++) {
-		horde[i] = newZombie(name);
+		std::string nameIndex = name + " " + (char)(i + '0');
+		horde[i].setName(nameIndex);
 	}
+
+	return horde;
 }
