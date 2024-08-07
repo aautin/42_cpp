@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:45:40 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 21:19:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/07 18:31:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void HumanB::setWeapon(Weapon &weapon)
 }
 void	HumanB::attack() const
 {
-	std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
+	if (this->weapon)
+		std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
+	else
+		std::cout << this->name << " has no weapon !?" << std::endl;
 }
