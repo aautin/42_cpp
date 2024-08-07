@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   File.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:55:02 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/07 23:56:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/07 23:56:21 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#ifndef FILE_HPP
+# define FILE_HPP
 
-#include "File.hpp"
+# include <string>
 
-int	main(int argc, char **argv)
+# define FAILURE	1
+# define SUCCESS	0
+
+class File
 {
-	if (argc != 4) {
-		std::cout << "Wrong arguments" << std::endl;
-		std::cout << "Must be: [filename] [string_target] [string_replacement]" << std::endl;
-	}
-	else {
-		std::string	source = argv[1];
+	private:
+		std::string	&name;
+		std::string	content;
 
-		File sourceFile(source);
-		sourceFile.load(sourceFile.getName());
-		sourceFile.replace();
-	}
-}
+	public:
+		/* Constructor-Destructor */
+		File(std::string &name);
+		~File();
+
+		/* Others */
+		std::string	&getName() const;
+		void		replace(std::string const &target, std::string const &replacement);
+		bool		load(std::string const &sourceFileName);
+		// void		stream(std::string const &destinationFileName) const ;
+};
+
+#endif
