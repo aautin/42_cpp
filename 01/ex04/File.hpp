@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:55:02 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/07 23:56:21 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:06:48 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ class File
 
 		/* Others */
 		std::string	&getName() const;
-		void		replace(std::string const &target, std::string const &replacement);
-		bool		load(std::string const &sourceFileName);
-		// void		stream(std::string const &destinationFileName) const ;
+		void		replace(std::string const target, std::string const replacement);
+		bool		load(std::string const sourceFileName);
+		bool		stream(std::string const &destinationFileName) const ;
 };
 
 #endif
