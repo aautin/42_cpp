@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:19:42 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 03:05:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/08 13:02:19 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <string>
 
-# define EDGE "\033[33m*********************************************\033[0m"
+# define TRANSITION		"\033[33m*********************************************\033[0m"
+# define COLUMN_NAMES	"\033[4m|Index     |Firstname |Lastname  |Nickname  |\033[0m"
 # define FIELD_SIZE 10
 
 void 		printField(std::string field);

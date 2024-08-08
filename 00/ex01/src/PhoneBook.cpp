@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 20:52:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 03:07:03 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:37:34 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* Constructor-Destructor */
 PhoneBook::PhoneBook(void)
 {
-	this->contactsNumber = 8;
+	this->contactsNumber = 0;
 }
 PhoneBook::~PhoneBook(void) {}
 
@@ -59,10 +59,15 @@ int		PhoneBook::getContactsNumber() const
 void	PhoneBook::search(int consecutiveFails)
 {
 	if (consecutiveFails == 0) {
-		printLine(NULL, EDGE);
-		for (int i = 0; i < getContactsNumber(); i++)
+		printLine(NULL, "\033[4m" TRANSITION "\033[0m");
+		printLine(NULL, COLUMN_NAMES);
+
+		for (int i = 0; i < getContactsNumber(); i++) {
+			if (i == getContactsNumber() - 1) std::cout << "\033[4m";
 			this->contacts[i].searchContact(i);
-		printLine(NULL, EDGE);
+			if (i == getContactsNumber() - 1) std::cout << "\033[0m";
+		}
+		printLine(NULL, TRANSITION);
 	}
 
 	std::string index = readLine("Contact index");
@@ -78,7 +83,7 @@ void	PhoneBook::search(int consecutiveFails)
 }
 void	PhoneBook::add()
 {
-	printLine(NULL, EDGE);
+	printLine(NULL, TRANSITION);
 
 	Contact newContact;
 
@@ -112,7 +117,7 @@ void	PhoneBook::add()
 void	PhoneBook::getCommand(int consecutiveFails)
 {
 	if (consecutiveFails == 0)
-		printLine(NULL, EDGE);
+		printLine(NULL, TRANSITION);
 
 	std::string command = readLine("Phonebook");
 	if (command.compare("SEARCH") == 0) {

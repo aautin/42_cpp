@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:48:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 02:02:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/08 12:54:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int main(void)
 	PhoneBook	phoneBook;
 
 	phoneBook.getCommand(0);
-	printLine(NULL, EDGE);
+	printLine(NULL, TRANSITION);
 	return EXIT_SUCCESS;
 }
