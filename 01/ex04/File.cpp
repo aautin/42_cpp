@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:55:02 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 19:10:14 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:14:54 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	File::replace(std::string const target, std::string const replacement)
 {
 	std::string	newContent;
 
-	for (int i = 0; i < content.length();) {
+	for (size_t i = 0; i < content.length();) {
 		if (content.compare(i, target.length(), target) == 0) {
 			newContent.append(replacement);
 			i += target.length();
