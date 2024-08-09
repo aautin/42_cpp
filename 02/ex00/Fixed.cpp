@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:01 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/09 15:38:59 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/09 15:51:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called" << std::endl;
+	this->value = 0;
 }
 Fixed::~Fixed()
 {
