@@ -1,7 +1,7 @@
 NAME:= a.out
 
 CC:= c++
-CFLAGS:= -Werror -Wall -Wextra -std=c++98 -lm
+CFLAGS:= -Werror -Wall -Wextra -std=c++98
 
 SRC_PATH:= ./
 OBJ_PATH:= ./
