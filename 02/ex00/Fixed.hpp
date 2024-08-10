@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/09 15:39:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/09 21:32:25 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ class Fixed
 {
 	private:
 		int					value;
-		static const int	fractionalBits_nb = 8;
+		static const int	fractionalBitsNb = 8;
 
 	public:
 		/* OCCF */
