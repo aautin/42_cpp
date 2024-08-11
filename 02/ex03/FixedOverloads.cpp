@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FixedOverloads.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:01 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/10 07:50:29 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/11 16:56:56 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,22 @@ Fixed	&Fixed::operator=(Fixed const &operand)
 }
 Fixed	Fixed::operator+(Fixed const &operand)
 {
-	Fixed res;
-	res.value = (this->value + operand.value) >> fractionalBitsNb;
+	Fixed res(this->toFloat() + operand.toFloat());
 	return res;
 }
 Fixed	Fixed::operator-(Fixed const &operand)
 {
-	Fixed res;
-	res.value = (this->value - operand.value) >> fractionalBitsNb;
+	Fixed res(this->toFloat() - operand.toFloat());
 	return res;
 }
 Fixed	Fixed::operator*(Fixed const &operand)
 {
-	Fixed res;
-	res.value = (this->value * operand.value) >> fractionalBitsNb;
+	Fixed res(this->toFloat() * operand.toFloat());
 	return res;
 }
 Fixed	Fixed::operator/(Fixed const &operand)
 {
-	Fixed res;
-	res.value = (this->value / operand.value) >> fractionalBitsNb;
+	Fixed res(this->toFloat() / operand.toFloat());
 	return res;
 }
 bool	Fixed::operator<(Fixed const &operand)  { return toFloat() < operand.toFloat();  }
