@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:01 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/10 07:35:22 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/12 14:53:23 by alexandre        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ Fixed::~Fixed()
 Fixed::Fixed(Fixed const &operand)
 {
 	// std::cout << "Copy constructor called" << std::endl;
-
 	*this = operand;
 }
 

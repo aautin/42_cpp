@@ -14,7 +14,7 @@ OBJ:= $(SRC:$(SRC_PATH)%.cpp=$(OBJ_PATH)%.o)
 all: $(NAME)
 
 debug: CFLAGS += -g3
-debug: $(NAME)
+debug: fclean $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
