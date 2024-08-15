@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:11:17 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/12 15:41:50 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/08/15 22:17:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 #include "Fixed.hpp"
 #include "Point.hpp"
 
-static Point *getPoints(int argc, char **argv)
+static void	printPoints(Point const a, Point const b, Point const c, Point const p)
+{
+	a.print("a");
+	b.print("b");
+	c.print("c");
+	p.print("p");
+}
+
+bool bsp(Point const a, Point const b, Point const c, Point const p);
+int	main(int argc, char **argv)
 {
 	float aX, aY, bX, bY, cX, cY, pX, pY;
 	if (argc >= 9) {
@@ -32,26 +41,19 @@ static Point *getPoints(int argc, char **argv)
 		pX = 1.2, pY = 7.2;
 	}
 
-	Point*	points = new Point[4] {
-		Point(aX, aY),
-		Point(bX, bY),
-		Point(cX, cY),
-		Point(pX, pY)
-	};
-	return points;
-}
+	Fixed number((const float) 0.99609375);
+	std::cout << number.toFloat() << std::endl;
+	number++;
+	std::cout << number.toFloat() << std::endl;
 
-bool bsp( Point const a, Point const b, Point const c, Point const point);
-int	main(int argc, char **argv)
-{
-	Point	*points = getPoints(argc, argv);
-	if (points == NULL)
-		return 0;
+	Point a(aX, aY);
+	Point b(bX, bY);
+	Point c(cX, cY);
+	Point p(pX, pY);
 
-	points[0].print("a"), points[1].print("b");
-	points[2].print("c"), points[3].print("point");
+	printPoints(a, b, c, p);
 
-	if (bsp(points[0], points[1], points[2], points[3]) == true)
+	if (bsp(a, b, c, p) == true)
 		std::cout << "In!" << std::endl;
 	else
 		std::cout << "Out!" << std::endl;
