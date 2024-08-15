@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FixedOverloads.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:01 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/11 16:00:10 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/08/15 23:12:03 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,103 +16,63 @@
 
 #include "Fixed.hpp"
 
-/* Private */
+/* Copy assignment */
 Fixed	&Fixed::operator=(Fixed const &operand)
 {
-	// std::cout << "Copy assignment operator called" << std::endl;
-
 	if (this != &operand)
-		this->value = operand.getRawBits();
+		this->value = operand.value;
 
 	return *this;
 }
-Fixed	Fixed::operator+(Fixed const &operand)
-{
-	Fixed res(this->toFloat() + operand.toFloat());
-	return res;
-}
-Fixed	Fixed::operator-(Fixed const &operand)
-{
-	Fixed res(this->toFloat() - operand.toFloat());
-	return res;
-}
-Fixed	Fixed::operator*(Fixed const &operand)
-{
-	Fixed res(this->toFloat() * operand.toFloat());
-	return res;
-}
-Fixed	Fixed::operator/(Fixed const &operand)
-{
-	Fixed res(this->toFloat() / operand.toFloat());
-	return res;
-}
-bool	Fixed::operator<(Fixed const &operand)  { return toFloat() < operand.toFloat();  }
-bool	Fixed::operator<=(Fixed const &operand) { return toFloat() <= operand.toFloat(); }
-bool	Fixed::operator>(Fixed const &operand)  { return toFloat() > operand.toFloat();  }
-bool	Fixed::operator>=(Fixed const &operand) { return toFloat() >= operand.toFloat(); }
-bool	Fixed::operator==(Fixed const &operand) { return toFloat() > operand.toFloat();  }
-bool	Fixed::operator!=(Fixed const &operand) { return toFloat() != operand.toFloat(); }
-float	Fixed::operator++(int)
-{
-	float	previousValue = toFloat();
 
-	/* if no-overflow-possible */
-	if ((value & ((1 << (fractionalBitsNb + 1)) - 1)) != (1 << (fractionalBitsNb + 1)) - 2)
-		value += 1;
-	else {
-		int	integerPart = value >> fractionalBitsNb;
-		value = 0;
-		value += (integerPart + 1) >> fractionalBitsNb;
-	}
-
-	return previousValue;
-}
-float	Fixed::operator--(int)
-{
-	float	previousValue = toFloat();
-
-	/* if no-underflow-possible */
-	if ((value & ((1 << (fractionalBitsNb + 1)) - 1)) != 0)
-		value -= 1;
-	else {
-		int	integerPart = value >> fractionalBitsNb;
-		value = 0;
-		value += ((integerPart - 1) >> fractionalBitsNb) + ((1 << (fractionalBitsNb + 1)) - 1);
-	}
-
-	return previousValue;
-}
-float	Fixed::operator++()
-{
-	/* if no-overflow-possible */
-	if ((value & ((1 << (fractionalBitsNb + 1)) - 1)) != (1 << (fractionalBitsNb + 1)) - 2)
-		value += 1;
-	else {
-		int	integerPart = value >> fractionalBitsNb;
-		value = 0;
-		value += (integerPart + 1) >> fractionalBitsNb;
-	}
-
-	return toFloat();
-}
-float	Fixed::operator--()
-{
-	/* if no-underflow-possible */
-	if ((value & ((1 << (fractionalBitsNb + 1)) - 1)) != 0)
-		value -= 1;
-	else {
-		int	integerPart = value >> fractionalBitsNb;
-		value = 0;
-		value += ((integerPart - 1) >> fractionalBitsNb) + ((1 << (fractionalBitsNb + 1)) - 1);
-	}
-
-	return toFloat();
-}
-
-
-/* Public */
+/* Stream insertion operator */
 std::ostream	&operator<<(std::ostream& outputStream, const Fixed& fixed)
 {
 	outputStream << fixed.toFloat();
 	return outputStream;
+}
+
+/* Arithmetic operations */
+Fixed	Fixed::operator+(Fixed const &operand)  { return Fixed(toFloat() + operand.toFloat()); }
+Fixed	Fixed::operator-(Fixed const &operand)  { return Fixed(toFloat() - operand.toFloat()); }
+Fixed	Fixed::operator*(Fixed const &operand)  { return Fixed(toFloat() * operand.toFloat()); }
+Fixed	Fixed::operator/(Fixed const &operand)
+{
+	if (operand.value == 0)
+		return Fixed(__INT32_MAX__);
+	return Fixed(toFloat() / operand.toFloat());
+}
+
+/* Comparison operations */
+bool	Fixed::operator<(Fixed const &operand)  { return value < operand.value;  }
+bool	Fixed::operator<=(Fixed const &operand) { return value <= operand.value; }
+bool	Fixed::operator>(Fixed const &operand)  { return value > operand.value;  }
+bool	Fixed::operator>=(Fixed const &operand) { return value >= operand.value; }
+bool	Fixed::operator==(Fixed const &operand) { return value == operand.value;  }
+bool	Fixed::operator!=(Fixed const &operand) { return value != operand.value; }
+
+/* Pre-increment and Pre-decrement */
+Fixed &Fixed::operator++()
+{
+	value += 1;
+	return *this;
+}
+Fixed &Fixed::operator--()
+{
+	value -= 1;
+	return *this;
+}
+
+/* Post-increment and Post-decrement */
+Fixed Fixed::operator++(int)
+{
+	Fixed temp = *this;
+	value += 1;
+	return temp;
+}
+Fixed Fixed::operator--(int)
+{
+	Fixed temp = *this;
+	value -= 1;
+	return temp;
 }

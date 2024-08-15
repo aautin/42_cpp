@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:01 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/10 07:35:22 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/15 23:15:42 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,28 @@
 #include "Fixed.hpp"
 
 /* OCCF */
-Fixed::Fixed()
-{
-	// std::cout << "Default constructor called" << std::endl;
-	this->value = 0;
-}
-Fixed::~Fixed()
-{
-	// std::cout << "Destructor called" << std::endl;
-}
-Fixed::Fixed(Fixed const &operand)
-{
-	// std::cout << "Copy constructor called" << std::endl;
-
-	*this = operand;
-}
+Fixed::Fixed() : value(0) {}
+Fixed::~Fixed() {}
+Fixed::Fixed(Fixed const &operand) : value(operand.value) {}
 
 
 /* Constructors */
 Fixed::Fixed(int const value)
 {
-	// std::cout << "Int constructor called" << std::endl;
 	this->value = value << fractionalBitsNb;
 }
 Fixed::Fixed(float const value)
 {
-	// std::cout << "Float constructor called" << std::endl;
-
 	int		integerPart = (int)(value);
 	float	fractionalPart = value - integerPart;
 
 	this->value = (integerPart << fractionalBitsNb) + roundf(fractionalPart * (1 << fractionalBitsNb));
 }
 
-
 /* Others */
 int		Fixed::getRawBits( void ) const
 {
-	// std::cout << "getRawBits member function called" << std::endl;
-
-	return this->value;
+	return value;
 }
 void	Fixed::setRawBits( int const raw )
 {
@@ -64,12 +46,12 @@ void	Fixed::setRawBits( int const raw )
 }
 int		Fixed::toInt( void ) const
 {
-	return this->value >> 8;
+	return value >> fractionalBitsNb;
 }
 float	Fixed::toFloat( void ) const
 {
 	float	integerPart = value >> fractionalBitsNb;
-	float	fractionalPart = value & ((1 << (fractionalBitsNb + 1)) - 1);
+	float	fractionalPart = value & ((1 << fractionalBitsNb) - 1);
 
 	return integerPart + (fractionalPart / (1 << fractionalBitsNb));
 }

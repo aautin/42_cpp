@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:02:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/10 08:47:57 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/15 22:27:34 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ class Fixed
 		bool	operator==(Fixed const &operand);
 		bool	operator!=(Fixed const &operand);
 
-		float	operator++();
-		float	operator--();
-		float	operator++(int);
-		float	operator--(int);
+		Fixed	&operator++();
+		Fixed	&operator--();
+		Fixed	operator++(int);
+		Fixed	operator--(int);
 };
 
 std::ostream	&operator<<(std::ostream &outputStream, const Fixed& fixed);
