@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexandre <alexandre@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 08:10:29 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/12 15:18:57 by alexandre        ###   ########.fr       */
+/*   Updated: 2024/08/15 22:13:43 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Point
 		Point();
 		Point(float const x, float const y);
 		Point(Point const &operand);
-		Point	&operator=(Point &operand);
+		Point &operator=(Point &operand);
 		~Point();
 
 		/* Others */
