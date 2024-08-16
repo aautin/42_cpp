@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:11:17 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/15 22:17:39 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/16 17:49:21 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	main(int argc, char **argv)
 		pX = strtof(argv[7], NULL), pY = strtof(argv[8], NULL);
 	}
 	else {
-		aX = 4.16, aY = 2.1;
-		bX = 1.9, bY = 7.6;
-		cX = 8, cY = 0.7;
-		pX = 1.2, pY = 7.2;
+		aX = 1.1471701951176, aY = 2.178569479715;
+		bX = 2.7556197836526, bY = 3.3250767;
+		cX = 2, cY = 1;
+		pX = 2.06, pY = 2.91;
 	}
 
 	Fixed number((const float) 0.99609375);
