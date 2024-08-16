@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:11:17 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 17:49:21 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/16 17:51:47 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,14 @@ int	main(int argc, char **argv)
 		pX = 2.06, pY = 2.91;
 	}
 
-	Fixed number((const float) 0.99609375);
-	std::cout << number.toFloat() << std::endl;
-	number++;
-	std::cout << number.toFloat() << std::endl;
-
 	Point a(aX, aY);
 	Point b(bX, bY);
 	Point c(cX, cY);
 	Point p(pX, pY);
-
 	printPoints(a, b, c, p);
 
 	if (bsp(a, b, c, p) == true)
 		std::cout << "In!" << std::endl;
 	else
 		std::cout << "Out!" << std::endl;
-
-	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 08:41:39 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 17:44:21 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/16 17:54:43 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,8 @@ bool	bsp( Point const a, Point const b, Point const c, Point const p)
 	float productABP = (AB.getX() * AP.getY() - AP.getX() * AB.getY()).toFloat();
 	float productBCP = (BC.getX() * BP.getY() - BP.getX() * BC.getY()).toFloat();
 	float productCAP = (CA.getX() * CP.getY() - CP.getX() * CA.getY()).toFloat();
+	std::cout << productABP << " / " << productBCP << " / " << productCAP << std::endl;
 
-	// std::cout << crossProductABP << " / " << crossProductBCP << " / " << crossProductCAP << std::endl;
-
-
-	if ((isOnRight(productABP) && isOnRight(productBCP) && isOnRight(productCAP))
-		|| (isOnLeft(productABP) && isOnLeft(productBCP) && isOnLeft(productCAP)))
-		return true;
-
-	return false;
+	return ((isOnRight(productABP) && isOnRight(productBCP) && isOnRight(productCAP))
+		|| (isOnLeft(productABP) && isOnLeft(productBCP) && isOnLeft(productCAP)));
 }
