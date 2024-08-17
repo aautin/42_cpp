@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:55:29 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 21:37:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 17:13:36 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	areArgsCorrect(int argc, char **argv)
 		return 0;
 
 	std::string	filter = argv[1];
-	if (filter.empty() || filter.length() > 1 || filter[0] < '1' || filter[0] > '4')
+	if (filter.std::string::empty() || filter.std::string::length() > 1
+		|| filter[0] < '1' || filter[0] > '4')
 		return 0;
 
 	return 1;
@@ -34,15 +35,19 @@ int			main(int argc, char **argv)
 	else {
 		Harl	harl2_0(argv[1][0] - '0');
 
-		harl2_0.complain("DEBUG");
-		harl2_0.complain("INFO");
-		harl2_0.complain("WARNING");
-		harl2_0.complain("ERROR");
+		std::string complain;
 
-		harl2_0.complain("OTHER");
-		harl2_0.complain("");
-
-		harl2_0.complain("INFO");
-		harl2_0.complain("INFO");
+		complain = "DEBUG";
+		harl2_0.Harl::complain(complain);
+		complain = "INFO";
+		harl2_0.Harl::complain(complain);
+		complain = "WARNING";
+		harl2_0.Harl::complain(complain);
+		complain = "ERROR";
+		harl2_0.Harl::complain(complain);
+		complain = "OTHER";
+		harl2_0.Harl::complain(complain);
+		complain = "";
+		harl2_0.Harl::complain(complain);
 	}
 }

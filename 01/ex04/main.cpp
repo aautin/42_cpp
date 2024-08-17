@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:55:02 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 19:12:04 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:31:19 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 		std::string	source = argv[1];
 
 		File sourceFile(source);
-		sourceFile.load(sourceFile.getName());
-		sourceFile.replace((std::string) argv[2], (std::string) argv[3]);
-		sourceFile.stream(source + ".replace");
+		sourceFile.File::load(sourceFile.getName());
+		sourceFile.File::replace((std::string) argv[2], (std::string) argv[3]);
+		sourceFile.File::stream(source + ".replace");
 	}
 }

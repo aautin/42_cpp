@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:52:56 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 21:35:12 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 17:12:05 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ class Harl
 	private:
 		/* Variables */
 		std::string	msgsNames[4];
-		int			msgsStatus[4];
 		void		(Harl::*msgsFunctions[4])();
 
 		/* Functions */
@@ -45,7 +44,7 @@ class Harl
 		Harl(int filter);
 		~Harl();
 
-		void	complain( std::string level );
+		void	complain( std::string &level );
 };
 
 #endif

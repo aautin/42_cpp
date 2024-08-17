@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:02:07 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 21:35:57 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 17:12:08 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,23 @@
 /* Constructor-Destructor */
 Harl::Harl(int filter) {
 
+	msgsNames[0] = "DEBUG";
+	msgsNames[1] = "INFO";
+	msgsNames[2] = "WARNING";
+	msgsNames[3] = "ERROR";
+
 	for (size_t i = 0; i < 4; i++)
-		msgsStatus[i] = OFF;
+		msgsFunctions[i] = NULL;
 	switch (filter) {
 		case 1:
-			msgsStatus[0] = ON;
+			msgsFunctions[0] = &Harl::debug;
 		case 2:
-			msgsStatus[1] = ON;
+			msgsFunctions[1] = &Harl::info;
 		case 3:
-			msgsStatus[2] = ON;
+			msgsFunctions[2] = &Harl::warning;
 		case 4:
-			msgsStatus[3] = ON;
+			msgsFunctions[3] = &Harl::error;
 	}
-	
-	msgsNames[0] = "DEBUG";
-	msgsFunctions[0] = &Harl::debug;
-
-	msgsNames[1] = "INFO";
-	msgsFunctions[1] = &Harl::info;
-
-	msgsNames[2] = "WARNING";
-	msgsFunctions[2] = &Harl::warning;
-
-	msgsNames[3] = "ERROR";
-	msgsFunctions[3] = &Harl::error;
 }
 Harl::~Harl() {}
 
@@ -65,9 +58,9 @@ void	Harl::error( void )
 
 
 /* Public */
-void		Harl::complain( std::string level )
+void		Harl::complain( std::string &level )
 {
 	for (size_t i = 0; i < 4; i++)
-		if (level == msgsNames[i] && msgsStatus[i] == ON)
-			(this->*msgsFunctions[i])();
+		if (level == msgsNames[i] && msgsFunctions[i] != NULL)
+			(this->*Harl::msgsFunctions[i])();
 }

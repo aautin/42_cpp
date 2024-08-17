@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 02:28:03 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 03:03:34 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:00:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(void)
 	david->announce();
 
 	Zombie *mathieu = newZombie("Mathieu");
-	mathieu->announce();
+	mathieu->Zombie::announce();
 
 	delete mathieu;
 	delete david;

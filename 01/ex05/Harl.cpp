@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:02:07 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 21:04:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:54:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	Harl::error( void )
 void		Harl::complain( std::string level )
 {
 	for (size_t i = 0; i < 4; i++)
-		if (level == msgsNames[i])
-			(this->*msgsFunctions[i])();
+		if (level == Harl::msgsNames[i])
+			(this->*Harl::msgsFunctions[i])();
 }

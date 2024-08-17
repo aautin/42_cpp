@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:27:20 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 18:23:47 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:11:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /* Constructor-Destructor */
 Weapon::Weapon()
 {
-	this->type = "default weapon type";
+	type = "default weapon type";
 }
 Weapon::Weapon(std::string const &type)
 {	
@@ -25,13 +25,12 @@ Weapon::Weapon(std::string const &type)
 }
 Weapon::~Weapon() {}
 
-
 /* Setter-Getter */
 std::string const	&Weapon::getType() const
 {
-	return this->type;
+	return type;
 }
 void	Weapon::setType(std::string const &newType)
 {
-	this->type = newType;
+	type = newType;
 }

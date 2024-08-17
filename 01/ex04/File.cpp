@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:55:02 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/08 19:14:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:33:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 File::File(std::string &name) : name(name) {}
 File::~File() {}
 
-
 /* Getters */
 std::string	&File::getName() const
 {
-	return this->name;
+	return name;
 }
-
 
 /* Others */
 void	File::replace(std::string const target, std::string const replacement)
@@ -34,12 +32,12 @@ void	File::replace(std::string const target, std::string const replacement)
 	std::string	newContent;
 
 	for (size_t i = 0; i < content.length();) {
-		if (content.compare(i, target.length(), target) == 0) {
-			newContent.append(replacement);
-			i += target.length();
+		if (content.std::string::compare(i, target.length(), target) == 0) {
+			newContent.std::string::append(replacement);
+			i += target.std::string::length();
 		}
 		else {
-			newContent.push_back(content[i]);
+			newContent.std::string::push_back(content[i]);
 			i++;
 		}
 	}
@@ -50,7 +48,7 @@ bool	File::load(std::string const sourceFileName)
 {
 	std::ifstream	stream(sourceFileName.c_str(), std::iostream::in);
 
-	if (!stream.is_open()) {
+	if (!stream.std::ifstream::is_open()) {
 		std::cout << "An error occured during " << sourceFileName << " opening" << std::endl;
 		return FAILURE;
 	}
@@ -64,11 +62,11 @@ bool	File::stream(std::string const &destinationFileName) const
 {
 	std::ofstream	stream(destinationFileName.c_str(), std::iostream::out);
 
-	if (!stream.is_open()) {
+	if (!stream.std::ofstream::is_open()) {
 		std::cout << "An error occured during " << destinationFileName << " opening" << std::endl;
 		return FAILURE;
 	}
 
-	stream.write(content.c_str(), content.length());
+	stream.std::ostream::write(content.c_str(), content.length());
 	return SUCCESS;
 }

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:30:53 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/04 18:41:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:10:03 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class HumanA
 		HumanA(std::string const &name, Weapon &weapon);
 		~HumanA();
 
+		/* Others */
 		void attack() const;
 };
 
