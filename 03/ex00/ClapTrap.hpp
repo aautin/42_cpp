@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:26:28 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 19:41:34 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/18 15:02:38 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 class ClapTrap
 {
 	private:
-		unsigned int	damage;
-		unsigned int	energy;
-		unsigned int	hit;
-		std::string		name;
+		unsigned int	_damage;
+		unsigned int	_energy;
+		unsigned int	_hit;
+		std::string		_name;
 
 	public:
 		/* OCCF */
