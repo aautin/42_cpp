@@ -6,12 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:26:28 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 20:39:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:34:06 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP\
+#ifndef		CLAPTRAP_HPP
+# define	CLAPTRAP_HPP
 
 # include <string>
 

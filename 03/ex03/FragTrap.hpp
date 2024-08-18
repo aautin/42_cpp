@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:34:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 20:58:19 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 14:12:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap: virtual public ClapTrap
 {
 	public:
 		/* OCCF */

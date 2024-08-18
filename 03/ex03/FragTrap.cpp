@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:37:24 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 20:59:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/18 15:22:24 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ FragTrap::FragTrap(std::string const name)
 	this->name = name;
 	std::cout << "FragTrap name constructor called." << std::endl;
 }
+
 /* Actions */
 void	FragTrap::highFivesGuys(void)
 {
