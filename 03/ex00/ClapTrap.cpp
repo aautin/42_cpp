@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:32:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/18 15:03:36 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:53:21 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ ClapTrap::ClapTrap(std::string const name) : _damage(0), _energy(10), _hit(10), 
 /* Actions */
 void	ClapTrap::attack(const std::string& target)
 {
+	if (_hit == 0) {
+		std::cout << "ClapTrap " << _name << " can't attack because he's dead." << std::endl;
+		return ;
+	}
+
 	if (_energy == 0) {
 		std::cout << "ClapTrap " << _name << " can't attack without energy." << std::endl;
 		return ;
@@ -69,6 +74,11 @@ void	ClapTrap::takeDamage(unsigned int amount)
 }
 void	ClapTrap::beRepaired(unsigned int amount)
 {
+	if (_hit == 0) {
+		std::cout << "ClapTrap " << _name << " can't recover because he's dead." << std::endl;
+		return ;
+	}
+
 	if (_energy == 0) {
 		std::cout << "ClapTrap " << _name << " can't recover without energy." << std::endl;
 		return ;

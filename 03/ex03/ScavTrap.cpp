@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:37:24 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/19 17:31:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:50:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void ScavTrap::guardGate() const
 }
 void	ScavTrap::attack(const std::string& target)
 {
+	if (hit == 0) {
+		std::cout << "ScavTrap " << name << " can't attack because he's dead." << std::endl;
+		return ;
+	}
+
 	if (energy == 0) {
 		std::cout << "ScavTrap " << name << " can't attack without energy." << std::endl;
 		return ;

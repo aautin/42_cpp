@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:32:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 20:07:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:53:56 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	ClapTrap::takeDamage(unsigned int amount)
 }
 void	ClapTrap::beRepaired(unsigned int amount)
 {
+	if (hit == 0) {
+		std::cout << "ClapTrap " << name << " can't recover because he's dead." << std::endl;
+		return ;
+	}
+
 	if (energy == 0) {
 		std::cout << "ClapTrap " << name << " can't recover without energy." << std::endl;
 		return ;
