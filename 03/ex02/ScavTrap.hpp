@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:34:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/19 17:30:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 18:11:49 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class ScavTrap : public ClapTrap
 
 		/* Actions */
 		void guardGate() const;
-		void ScavTrap::attack(const std::string& target);
+		void attack(const std::string& target);
 };
 
 #endif
