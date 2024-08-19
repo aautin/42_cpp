@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:34:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/16 20:45:58 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:29:22 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ class ScavTrap : public ClapTrap
 		ScavTrap(std::string const name);
 
 		/* Actions */
-		void guardGate();
+		void guardGate() const;
+		void attack(const std::string& target);
 };
 
 #endif
