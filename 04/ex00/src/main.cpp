@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:09:13 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/21 16:58:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/21 18:16:42 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ int main()
 	j->makeSound();
 	k->makeSound();
 	w->makeSound();
+
+	delete i;
+	delete j;
+	delete k;
+	delete w;
 }
