@@ -31,7 +31,7 @@ $(OBJ_PATH):
 -include $(DEP)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_PATH)
 	@echo "(≧◡≦) Compiling $< into $@ UwU"
 
 clean:
