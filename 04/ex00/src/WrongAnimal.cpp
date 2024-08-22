@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:51:13 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/21 16:48:55 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ WrongAnimal::WrongAnimal(std::string type) : _type(type) {
 }
 
 WrongAnimal::~WrongAnimal() {
-	announce("WrongAnimal default destructor called");
+	announce("WrongAnimal destructor called");
 }
 
 WrongAnimal::WrongAnimal(WrongAnimal const &other) : _type(other.getType()) {

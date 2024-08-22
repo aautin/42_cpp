@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:37:24 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/19 17:50:39 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &other)
 }
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap default destructor called." << std::endl;
+	std::cout << "ScavTrap destructor called." << std::endl;
 }
 
 /* Special constructor */

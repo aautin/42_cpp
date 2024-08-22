@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:37:24 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/18 15:22:24 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ FragTrap &FragTrap::operator=(FragTrap const &other)
 }
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap default destructor called." << std::endl;
+	std::cout << "FragTrap destructor called." << std::endl;
 }
 
 /* Special constructor */

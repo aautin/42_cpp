@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:32:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/19 17:53:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &other)
 }
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap default destructor called." << std::endl;
+	std::cout << "ClapTrap destructor called." << std::endl;
 }
 
 /* Special constructor */

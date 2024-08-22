@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:51:13 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/21 16:56:09 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ WrongCat::WrongCat() : WrongAnimal("WrongCat") {
 }
 
 WrongCat::~WrongCat() {
-	announce("WrongCat default destructor called");
+	announce("WrongCat destructor called");
 }
 
 WrongCat::WrongCat(WrongCat const &other) : WrongAnimal("WrongCat") {

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:51:13 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/21 16:46:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Dog::Dog() : Animal("Dog") {
 }
 
 Dog::~Dog() {
-	announce("Dog default destructor called");
+	announce("Dog destructor called");
 }
 
 Dog::Dog(Dog const &other) : Animal("Dog") {

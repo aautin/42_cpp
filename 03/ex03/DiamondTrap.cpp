@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:22:06 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/19 17:40:53 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ DiamondTrap &DiamondTrap::operator=(DiamondTrap const &other)
 }
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "DiamondTrap default destructor called." << std::endl;
+	std::cout << "DiamondTrap destructor called." << std::endl;
 }
 
 /* Special constructor */
