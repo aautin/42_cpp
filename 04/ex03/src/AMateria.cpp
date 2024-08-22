@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:25:26 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 14:51:22 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 17:22:20 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ std::string const &AMateria::getType() const {
 }
 
 virtual void AMateria::use(ICharacter &target) {
-	std::cout << "Non-concretized Materia, non-affects " << target.getName() << std::endl;
+	std::cout << "* Non-concretized Materia, non-affects " << target.getName() + " *";
+	std::cout << std::endl;
 }
 /* <----------------------------> */
