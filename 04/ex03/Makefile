@@ -8,7 +8,7 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
-SRC_FILES := AMateria main
+SRC_FILES := AMateria Cure Ice main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)
