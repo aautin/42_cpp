@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:19:24 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 14:56:58 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 19:20:17 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 # include <string>
 
+# include "ICharacter.hpp"
+
 class AMateria
 {
 	public:
 		/* >------ Cons/Destructors ------< */
 		AMateria();
-		~AMateria();
+		virtual ~AMateria();
 		AMateria(AMateria const &other);
 		AMateria	&operator=(AMateria const &other);
 

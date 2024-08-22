@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:53:44 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 17:22:25 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 19:25:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ Ice &Ice::operator=(Ice const &other) {
 
 /* >----------- Others -----------< */
 AMateria *Ice::clone() const {
-	AMateria *clone = new Ice;
+	AMateria *newIce = new Ice;
 
-	clone->_type = _type;
-	return clone;
+	*newIce = *this;
+	return newIce;
 }
 
 void Ice::use(ICharacter &target) {

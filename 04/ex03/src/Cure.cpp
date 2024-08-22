@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:53:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 17:22:24 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 19:25:20 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ Cure &Cure::operator=(Cure const &other) {
 
 /* >----------- Others -----------< */
 AMateria *Cure::clone() const {
-	AMateria *clone = new Cure;
+	AMateria *newCure = new Cure;
 
-	clone->_type = _type;
-	return clone;
+	*newCure = *this;
+	return newCure;
 }
 
 void Cure::use(ICharacter &target) {
