@@ -6,11 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:09:13 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 11:34:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 12:20:03 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define ANIMALS_NUMBER 6
+
 #include <iostream>
+#include <sstream>
 
 #include "Animal.hpp"
 #include "Brain.hpp"
@@ -19,20 +22,29 @@
 
 int main()
 {
-	// const Animal* i = new Cat();
-	// const Animal* j = new Dog();
-	Brain* k = new Brain();
+	std::cout << std::endl << " -------- Constructions part ------- " << std::endl;
 
-	k->setIdea("I love cats");
-	k->setIdea("But I prefer dogs");
+	Animal *myAnimals[ANIMALS_NUMBER];
+	Animal *simpleAnimal = new Animal;
 
-	std::cout << k->getIdea(0) << std::endl;
-	std::cout << k->getIdea(1) << std::endl;
-	std::cout << k->getIdea(2) << std::endl;
+	for (int i = 0; i < ANIMALS_NUMBER; i++) {
+		if (i % 2)
+			myAnimals[i] = new Cat();
+		else
+			myAnimals[i] = new Dog();
+	}
 
-	// delete i;
-	// delete j;
-	delete k;
+	std::cout << std::endl << " ------------ Tests part ----------- " << std::endl;
+
+	for (int i = 0; i < ANIMALS_NUMBER; i++)
+		myAnimals[i]->makeSound();
+	simpleAnimal->makeSound();
+
+	std::cout << std::endl << " -------- Destructions part -------- " << std::endl;
+
+	for (int i = 0; i < ANIMALS_NUMBER; i++)
+		delete myAnimals[i];
+	delete simpleAnimal;
 
 	return 0;
 }

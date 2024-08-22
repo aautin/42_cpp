@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:17:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 11:29:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:43:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Brain::Brain() {
 }
 
 Brain::~Brain() {
-	std::cout << "Brain default destructor called" << std::endl;
+	std::cout << "Brain destructor called" << std::endl;
 }
 
 Brain::Brain(Brain const &other) {

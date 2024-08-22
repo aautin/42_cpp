@@ -8,7 +8,7 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
-SRC_FILES := Brain main
+SRC_FILES := Animal Brain Cat Dog main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)
