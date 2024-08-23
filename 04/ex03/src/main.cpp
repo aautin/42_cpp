@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:26:17 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/23 12:43:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/23 13:39:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "Character.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
+#include "MateriaSource.hpp"
 
 int main() {
 
@@ -74,30 +75,43 @@ int main() {
 	delete player4;
 
 	delete ice3;
+
+
+
+	/* =================================================================== */
+	std::cout << std::endl << "-------- subject's main function --------" << std::endl;
+
+
+
+	std::cout << std::endl << "Construct MateriaSource, put Materias in it" << std::endl;
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+
+
+
+	std::cout << std::endl << "Construct Character, he equips from MateriaSource" << std::endl;
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	tmp = src->createMateria("notexisting");
+	
+
+
+	std::cout << std::endl << "Construct Character, tries to use equipment on himself" << std::endl;
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+
+
+
+	std::cout << std::endl << "Destruct a Character and MaterialSource" << std::endl;
+	delete bob;
+	delete me;
+	delete src;
+	
+	return 0;
 }
-
-// int main()
-// {
-// 	IMateriaSource* src = new MateriaSource();
-
-// 	src->learnMateria(new Ice());
-// 	src->learnMateria(new Cure());
-	
-// 	ICharacter* me = new Character("me");
-	
-// 	AMateria* tmp;
-// 	tmp = src->createMateria("ice");
-// 	me->equip(tmp);
-// 	tmp = src->createMateria("cure");
-// 	me->equip(tmp);
-	
-// 	ICharacter* bob = new Character("bob");
-// 	me->use(0, *bob);
-// 	me->use(1, *bob);
-	
-// 	delete bob;
-// 	delete me;
-// 	delete src;
-	
-// 	return 0;
-// }
