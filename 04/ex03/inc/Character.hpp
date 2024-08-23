@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:26:51 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 19:33:38 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/23 11:47:30 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ class Character : public ICharacter
 		Character(Character const &other);
 		Character			&operator=(Character const &other);
 
-		/* >------ Others ------< */
-		void				copyInventory(Character const &other);
+		/* >------ Getters ------< */
 		std::string const	&getName() const;
-		void				equip(AMateria* m);
-		void				unequip(int idx);
-		void				use(int idx, ICharacter& target);
+
+		/* >------ Others ------< */
+		void	deleteMateria(int idx);
+		void	copyInventory(Character const &other);
+		void	equip(AMateria* m);
+		void	unequip(int idx);
+		void	use(int idx, ICharacter& target);
 
 	private:
 		std::string	_name;

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:32:39 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/22 19:20:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/23 11:56:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ Character::~Character() {
 Character::Character(Character const &other) : _name(other._name) {
 	std::cout << "Character copy constructor called" << std::endl;
 
+	for (int i = 0; i < _MATERIAS_SIZE; i++)
+		_materias[i] = NULL;
+
 	copyInventory(other);
 }
 
@@ -54,7 +57,19 @@ Character &Character::operator=(Character const &other) {
 /* <----------------------------> */
 
 
+/* >----------- Getters -----------< */
+std::string const &Character::getName() const {
+	return _name;
+}
+/* <----------------------------> */
+
+
 /* >----------- Others -----------< */
+void	Character::deleteMateria(int idx) {
+	if (0 <= idx && idx <= 3)
+		delete _materias[idx];
+}
+
 void	Character::copyInventory(Character const &other) {
 	for (int i = 0; i < _MATERIAS_SIZE; i++) {
 		if (_materias[i] != NULL) {
@@ -70,32 +85,34 @@ void	Character::copyInventory(Character const &other) {
 	_materiasNumber = other._materiasNumber;
 }
 
-std::string const &Character::getName() const {
-	return _name;
-}
-
 void Character::equip(AMateria* m) {
 	if (_materiasNumber == 4)
 		std::cout << _name + ": Can't equip, inventory is full" << std::endl;
 	else {
-		_materias[_materiasNumber] = m;
+		int i;
+		for (i = 0; i < _MATERIAS_SIZE; i++) {
+			if (_materias[i] == NULL) {
+				_materias[i] = m;
+				break;
+			}
+		}
 		_materiasNumber++;
-		std::cout << _name + ": equips " + m->getType() << std::endl;
+		std::cout << _name + ": equips " + m->getType() << " at index " << i << std::endl;
 	}
 }
 
 void Character::unequip(int idx) {
-	if (idx >= _materiasNumber)
+	if (idx < 0 || idx > 3 || _materias[idx] == NULL)
 		std::cout << _name + ": Can't unequip, nothing's there" << std::endl;
 	else {
+		std::cout << _name + ": unequips its " << idx << " materia" << std::endl;
 		_materias[idx] = NULL;
 		_materiasNumber--;
-		std::cout << _name + ": unequips " + _materias[idx]->getType() << std::endl;
 	}
 }
 
 void Character::use(int idx, ICharacter& target) {
-	if (idx >= _materiasNumber)
+	if (idx < 0 || idx > 3 || _materias[idx] == NULL)
 		std::cout << _name + ": Can't use, nothing's there" << std::endl;
 	else
 		_materias[idx]->use(target);
