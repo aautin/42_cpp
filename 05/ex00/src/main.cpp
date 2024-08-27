@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 17:09:04 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/27 18:05:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void) {
 	try {
 		Bureaucrat Default(DEFAULT_NAME, DEFAULT_GRADE);
 	}
-	catch (IGradeException &e) {
+	catch (IBureaucratException &e) {
 		std::cout << e.what() << std::endl;
 	}
 
@@ -28,7 +28,7 @@ int main(void) {
 	try {
 		Bob = new Bureaucrat("Bob", MAXIMAL_GRADE - 1);
 	}
-	catch (IGradeException &e) {
+	catch (IBureaucratException &e) {
 		std::cout << e.what() << std::endl;
 		Bob = NULL;
 	}
@@ -37,7 +37,7 @@ int main(void) {
 	try {
 		Tom = new Bureaucrat("Tom", MINIMAL_GRADE + 1);
 	}
-	catch (IGradeException &e) {
+	catch (IBureaucratException &e) {
 		std::cout << e.what() << std::endl;
 		Tom = NULL;
 	}
@@ -46,7 +46,7 @@ int main(void) {
 	try {
 		Arthur = new Bureaucrat("Arthur", 3);
 	}
-	catch (IGradeException &e) {
+	catch (IBureaucratException &e) {
 		std::cout << e.what() << std::endl;
 		Arthur = NULL;
 	}
@@ -58,7 +58,7 @@ int main(void) {
 			try {
 				Arthur->upGrade();
 			}
-			catch (IGradeException &e) {
+			catch (IBureaucratException &e) {
 				std::cout << e.what() << std::endl;
 				break ;
 			}

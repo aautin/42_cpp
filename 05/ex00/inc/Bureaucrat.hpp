@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:03:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 16:50:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/27 18:05:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <exception>
 # include <string>
 
-class IGradeException : public std::exception
+class IBureaucratException : public std::exception
 {
 	public:
 		virtual const char* what() const throw() = 0;
@@ -45,13 +45,13 @@ class Bureaucrat
 		int			getGrade() const;
 
 		/* >------ Exceptions ------< */
-		class GradeTooHighException : public IGradeException
+		class GradeTooHighException : public IBureaucratException
 		{
 			public:
 				GradeTooHighException() {}
 				virtual const char*	what() const throw() { return "Too high"; }
 		};
-		class GradeTooLowException : public IGradeException
+		class GradeTooLowException : public IBureaucratException
 		{
 			public:
 				GradeTooLowException() {}
