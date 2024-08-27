@@ -8,7 +8,7 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
-SRC_FILES := main # Bureaucrat
+SRC_FILES := Bureaucrat main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)
