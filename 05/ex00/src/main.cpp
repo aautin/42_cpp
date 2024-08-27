@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 16:57:06 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/27 17:09:04 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "Bureaucrat.hpp"
 
 int main(void) {
-	
+
+	std::cout << std::endl << "-----------CONSTRUCTION-----------" << std::endl;
 	try {
 		Bureaucrat Default(DEFAULT_NAME, DEFAULT_GRADE);
 	}
@@ -43,13 +44,30 @@ int main(void) {
 
 	Bureaucrat *Arthur;
 	try {
-		Arthur = new Bureaucrat("Arthur", DEFAULT_GRADE);
+		Arthur = new Bureaucrat("Arthur", 3);
 	}
 	catch (IGradeException &e) {
 		std::cout << e.what() << std::endl;
 		Arthur = NULL;
 	}
 
+	std::cout << std::endl << "-----------OTHER TESTS-----------" << std::endl;
+	if (Arthur != NULL) {
+		std::cout << *Arthur << std::endl;
+		while (1) {
+			try {
+				Arthur->upGrade();
+			}
+			catch (IGradeException &e) {
+				std::cout << e.what() << std::endl;
+				break ;
+			}
+			std::cout << *Arthur << std::endl;
+		}
+	}
+
+
+	std::cout << std::endl << "-----------DESTRUCTION-----------" << std::endl;
 	delete Tom;
 	delete Bob;
 	delete Arthur;
