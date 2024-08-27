@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:15:05 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 16:56:07 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/27 18:25:54 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,12 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &it) {
 	out << it.getName() << ", bureaucrat grade " << it.getGrade() << ".";
 
 	return out;
+}
+
+Bureaucrat &Bureaucrat::operator=(Bureaucrat const &other) {
+	std::cout << _name << ": Bureaucrat copy assignment called" << std::endl;
+
+	_grade = other._grade;
+	return *this;
 }
 /* <----------------------------> */

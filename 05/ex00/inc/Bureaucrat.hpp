@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:03:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 18:05:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/27 18:25:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ class Bureaucrat
 		~Bureaucrat();
 		Bureaucrat(Bureaucrat const &other);
 
+		/* >------ Overloads ------< */
+		Bureaucrat	&operator=(Bureaucrat const &other);
+
 		/* >------ Setters ------< */
 		void		upGrade();
 		void		downGrade();
@@ -63,7 +66,6 @@ class Bureaucrat
 		int					_grade;
 };
 
-/* >------ Overloads ------< */
 std::ostream	&operator<<(std::ostream &out, Bureaucrat const &it);
 
 #endif
