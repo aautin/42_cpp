@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 14:39:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 15:32:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 
@@ -92,6 +93,39 @@ int main(void) {
 	}
 	std::cout << myForm2 << std::endl;
 
+
+	std::cout << std::endl << "-----------CREATE PRESIDENTIALPARDON AND BUREAUCRATE, SIGN AND EXECUTE IT-----------" << std::endl;
+	Bureaucrat *President;
+	try {
+		President = new Bureaucrat("Emmanuel Macron", 1);
+		PresidentialPardonForm myForm3("myForm3");
+		std::cout << myForm3 << std::endl;
+		std::cout << *President << std::endl;
+		try {
+			myForm3.beSigned(*President);
+			President->signForm(myForm3);
+			try {
+				myForm3.execute(*President);
+				President->executeForm(myForm3);
+			}
+			catch (IException &e) {
+				President->executeForm(myForm3, e.what());
+			}
+		}
+		catch (IException &e) {
+			President->signForm(myForm3, e.what());
+		}
+		std::cout << myForm3 << std::endl;
+	}
+	catch (IException const &e) {
+		std::cout << e.what() << std::endl;
+		President = NULL;
+	}
+	catch (std::exception const &e) {
+		std::cout << "Here is my error : " << e.what() << std::endl;
+	}
+
 	std::cout << std::endl << "-----------DESTRUCTION-----------" << std::endl;
 	delete Arthur;
+	delete President;
 }

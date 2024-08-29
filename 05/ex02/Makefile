@@ -8,7 +8,8 @@ SRC_PATH := src/
 OBJ_PATH := obj/
 INC_PATH := inc/
 
-SRC_FILES := AForm Bureaucrat RobotomyRequestForm ShrubberyCreationForm main
+SRC_FILES := AForm Bureaucrat PresidentialPardonForm \
+	RobotomyRequestForm ShrubberyCreationForm main
 SRC := $(patsubst %,$(SRC_PATH)%.$(FILE_TYPE), $(SRC_FILES))
 OBJ := $(patsubst %,$(OBJ_PATH)%.o,$(SRC_FILES))
 DEP := $(OBJ:.o=.d)
