@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:15:05 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:23:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:51:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const &other) {
 /* <----------------------------> */
 
 
-/* >----------- Others -----------< */
+/* >----------- Actions -----------< */
 void Bureaucrat::signForm(AForm const &form, std::string const &reason) const {
 	if (reason.empty()) {
 		std::cout << _name << " signed " << form.getName() << "." << std::endl;

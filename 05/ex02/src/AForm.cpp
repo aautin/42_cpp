@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:59:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:29:09 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:51:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ std::ostream &operator<<(std::ostream &outputStream, AForm const &it) {
 /* <----------------------------> */
 
 
-/* >----------- Others -----------< */
+/* >----------- Actions -----------< */
 void AForm::beSigned(Bureaucrat const &signatory) {
 	if (_isSigned)
 		throw FormAlreadySigned();

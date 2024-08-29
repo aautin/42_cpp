@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:44:08 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:33:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:51:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class ShrubberyCreationForm : public AForm
 		/* >------ Overloads ------< */
 		ShrubberyCreationForm	&operator=(ShrubberyCreationForm const &other);
 
-		/* >------ Others ------< */
+		/* >------ Actions ------< */
 		void					execute(Bureaucrat const &executor) const;
 
 	private:

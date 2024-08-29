@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:00:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:30:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:51:34 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class AForm
 		int				getGradeToExecute() const { return _gradeToExecute; }
 		void			setIsSigned(int isSigned) { _isSigned = isSigned; }
 
-		/* >------ Others ------< */
+		/* >------ Actions ------< */
 		void			beSigned(Bureaucrat const &signatory);
 		virtual void	execute(Bureaucrat const &executor) const = 0;
 

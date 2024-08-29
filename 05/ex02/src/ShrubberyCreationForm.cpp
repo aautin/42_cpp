@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:20:06 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:29:57 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:51:28 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 /* <----------------------------> */
 
 
-/* >----------- Others -----------< */
+/* >----------- Actions -----------< */
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	if (getIsSigned() == false)
 		throw FormNotSigned();
