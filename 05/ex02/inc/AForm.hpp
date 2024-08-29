@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:00:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:51:34 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:08:28 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,37 @@
 # include <string>
 
 # include "Bureaucrat.hpp"
+
+class GradeTooHighException : public IException
+{
+	public:
+		GradeTooHighException() {}
+		virtual const char*	what() const throw() { return "Grade too high"; }
+};
+class GradeTooLowException : public IException
+{
+	public:
+		GradeTooLowException() {}
+		virtual const char*	what() const throw() { return "Grade too low"; }
+};
+class FormAlreadySigned : public IException
+{
+	public:
+		FormAlreadySigned() {}
+		virtual const char*	what() const throw() { return "Form already signed"; }
+};
+class FormNotSigned : public IException
+{
+	public:
+		FormNotSigned() {}
+		virtual const char*	what() const throw() { return "Form not signed"; }
+};
+class FileException : public IException
+{
+	public:
+		FileException() {}
+		virtual const char*	what() const throw() { return "Couldn't create or fill the file"; }
+};
 
 class AForm
 {
@@ -43,29 +74,12 @@ class AForm
 		AForm			&operator=(AForm const &other);
 
 		/* >------ Exceptions ------< */
-		class GradeTooHighException : public IException
+		
+		class AFormException : public GradeTooHighException, public GradeTooLowException,
+			public FormAlreadySigned, public FormNotSigned, public FileException
 		{
 			public:
-				GradeTooHighException() {}
-				virtual const char*	what() const throw() { return "Grade too high"; }
-		};
-		class GradeTooLowException : public IException
-		{
-			public:
-				GradeTooLowException() {}
-				virtual const char*	what() const throw() { return "Grade too low"; }
-		};
-		class FormAlreadySigned : public IException
-		{
-			public:
-				FormAlreadySigned() {}
-				virtual const char*	what() const throw() { return "Form already signed"; }
-		};
-		class FormNotSigned : public IException
-		{
-			public:
-				FormNotSigned() {}
-				virtual const char*	what() const throw() { return "Form not signed"; }
+				AFormException() {};
 		};
 
 	private:

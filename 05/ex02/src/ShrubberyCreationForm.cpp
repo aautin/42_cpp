@@ -6,11 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:20:06 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:51:28 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:07:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <fstream>
 
 #include "ShrubberyCreationForm.hpp"
 
@@ -53,6 +54,13 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	if (executor.getGrade() > getGradeToExecute())
 		throw GradeTooLowException();
 
-	std::cout << ASCII_TREES << std::endl;
+	std::string	fileName = _target + "_shrubbery";
+	std::string trees = ASCII_TREES;
+
+	std::ofstream	stream(fileName.c_str(), std::iostream::out);
+	if (!stream.std::ofstream::is_open()) {
+		throw FileException();
+	}
+	stream.std::ostream::write(trees.c_str(), trees.length());
 }
 /* <----------------------------> */
