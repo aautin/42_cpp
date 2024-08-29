@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:03:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 18:33:32 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:42:10 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ class IException : public std::exception
 		virtual const char* what() const throw() = 0;
 };
 
+class Form;
+
 class Bureaucrat
 {
 	public:
@@ -46,6 +48,9 @@ class Bureaucrat
 		/* >------ Getters ------< */
 		std::string	getName() const;
 		int			getGrade() const;
+
+		/* >------ Actions ------< */
+		void		signForm(Form const &form, std::string const &reason = "") const;
 
 		/* >------ Exceptions ------< */
 		class GradeTooHighException : public IException

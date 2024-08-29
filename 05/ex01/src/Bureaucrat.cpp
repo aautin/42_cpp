@@ -6,12 +6,13 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:15:05 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/27 18:27:50 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:37:58 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
 /* >----------- Cons/Destructors -----------< */
@@ -75,5 +76,18 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const &other) {
 
 	_grade = other._grade;
 	return *this;
+}
+/* <----------------------------> */
+
+
+/* >----------- Actions -----------< */
+void Bureaucrat::signForm(Form const &form, std::string const &reason) const {
+	if (reason.empty()) {
+		std::cout << _name << " signed " << form.getName() << "." << std::endl;
+		return ;
+	}
+
+	std::cout << _name << " couldn't sign " << form.getName()
+		<< " because: " << reason + "." << std::endl;
 }
 /* <----------------------------> */

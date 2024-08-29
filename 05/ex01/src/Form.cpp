@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:59:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/28 14:44:29 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:38:36 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ std::ostream &operator<<(std::ostream &outputStream, Form const &it) {
 /* <----------------------------> */
 
 
-/* >----------- Others -----------< */
+/* >----------- Actions -----------< */
 void Form::beSigned(Bureaucrat const &signatory) {
 	if (_isSigned)
 		throw FormAlreadySigned();
@@ -70,15 +70,5 @@ void Form::beSigned(Bureaucrat const &signatory) {
 		throw GradeTooLowException();
 
 	_isSigned = true;
-}
-
-void Form::signForm(Bureaucrat const &signatory, std::string const &reason) const {
-	if (reason.empty()) {
-		std::cout << signatory.getName() << " signed " << _name << "." << std::endl;
-		return ;
-	}
-
-	std::cout << signatory.getName() << " couldn't sign " << _name
-		<< " because: " << reason + "." << std::endl;
 }
 /* <----------------------------> */

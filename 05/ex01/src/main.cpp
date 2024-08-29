@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/28 14:45:15 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:42:46 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,32 @@ int main(void) {
 	std::cout << myForm << std::endl;
 	try {
 		myForm.beSigned(*Arthur);
-		myForm.signForm(*Arthur, "");
+		Arthur->signForm(myForm);
 	}
 	catch (IException const &e) {
-		myForm.signForm(*Arthur, e.what());
+		Arthur->signForm(myForm, e.what());
 	}
 
 	std::cout << std::endl << "-----------FAIL TO SIGN A SIGNED FORM-----------" << std::endl;
 	try {
 		myForm.beSigned(*Arthur);
-		myForm.signForm(*Arthur, "");
+		Arthur->signForm(myForm);
 	}
 	catch (IException const &e) {
-		myForm.signForm(*Arthur, e.what());
+		Arthur->signForm(myForm, e.what());
 	}
 
 	std::cout << std::endl << "-----------DOWNGRADE ARTHUR AND FAIL TO SIGN A FORM-----------" << std::endl;
 	Arthur->downGrade();
-	Form myForm2("taxes", 1, 61);
+	Form myForm2("other taxes", 1, 61);
 	std::cout << *Arthur << std::endl;
 	std::cout << myForm2 << std::endl;
 	try {
 		myForm2.beSigned(*Arthur);
-		myForm2.signForm(*Arthur, "");
+		Arthur->signForm(myForm);
 	}
 	catch (IException const &e) {
-		myForm2.signForm(*Arthur, e.what());
+		Arthur->signForm(myForm, e.what());
 	}
 
 
