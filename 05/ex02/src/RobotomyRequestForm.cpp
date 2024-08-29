@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:20:06 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 14:33:42 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:07:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
+#include <iostream>
 
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 /* >----------- Cons/Destructors -----------< */
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target)
-	: AForm("ShrubberyCreation", 145, 137), _target(target) {
-	std::cout << _target << ": ShrubberyCreation default constructor called" << std::endl;
+RobotomyRequestForm::RobotomyRequestForm(std::string const &target)
+	: AForm("ShrubberyCreation", 72, 45), _target(target) {
+	std::cout << _target << ": RobotomyRequest default constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << _target << ": ShrubberyCreation destructor called" << std::endl;
+RobotomyRequestForm::~RobotomyRequestForm() {
+	std::cout << _target << ": RobotomyRequest destructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &other)
 	: AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()) {
-	std::cout << _target << ": ShrubberyCreation copy constructor called" << std::endl;
+	std::cout << _target << ": RobotomyRequest copy constructor called" << std::endl;
 
 	setIsSigned(other.getIsSigned());
 	_target = other._target;
@@ -36,8 +38,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other)
 
 
 /* >----------- Overloads -----------< */
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &other) {
-	std::cout << _target << ": ShrubberyCreation copy assigment called" << std::endl;
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &other) {
+	std::cout << _target << ": RobotomyRequest copy assigment called" << std::endl;
 
 	setIsSigned(other.getIsSigned());
 	_target = other._target;
@@ -47,20 +49,17 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 
 /* >----------- Actions -----------< */
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	if (getIsSigned() == false)
 		throw FormNotSigned();
 
 	if (executor.getGrade() > getGradeToExecute())
 		throw GradeTooLowException();
 
-	std::string	fileName = _target + "_shrubbery";
-	std::string trees = ASCII_TREES;
-
-	std::ofstream	stream(fileName.c_str(), std::iostream::out);
-	if (!stream.std::ofstream::is_open()) {
-		throw FileException();
-	}
-	stream.std::ostream::write(trees.c_str(), trees.length());
+	std::srand(std::time(0));
+	if (rand() % 2)
+		std::cout << _target << " has been robotomized." << std::endl;
+	else
+		std::cout << _target << " robotomization failed..." << std::endl;
 }
 /* <----------------------------> */

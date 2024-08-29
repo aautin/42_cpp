@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:03:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 14:04:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:32:27 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
+# define NO_EXCEPTION	""
 # define DEFAULT_NAME	"DefaultName"
 # define DEFAULT_GRADE	75
 

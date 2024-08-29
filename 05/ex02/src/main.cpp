@@ -6,22 +6,22 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:50:40 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:39:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main(void) {
 
 	std::cout << std::endl << "-----------CREATE AND UPGRADE BUREAUCRAT-----------" << std::endl;
 	Bureaucrat *Arthur;
 	try {
-		Arthur = new Bureaucrat("Arthur", 140);
+		Arthur = new Bureaucrat("Arthur", 47);
 	}
 	catch (IException &e) {
 		std::cout << e.what() << std::endl;
@@ -29,7 +29,7 @@ int main(void) {
 	}
 	if (Arthur != NULL) {
 		std::cout << *Arthur << std::endl;
-		while (Arthur->getGrade() > 137) {
+		while (Arthur->getGrade() > 45) {
 			try {
 				Arthur->upGrade();
 			}
@@ -42,8 +42,8 @@ int main(void) {
 	}
 
 
-	std::cout << std::endl << "-----------CREATE SHRUBBERYCREATIONFORM, SIGN AND EXECUTE IT-----------" << std::endl;
-	ShrubberyCreationForm myForm("myForm");
+	std::cout << std::endl << "-----------CREATE ROBOTOMYREQUEST, SIGN AND EXECUTE IT-----------" << std::endl;
+	RobotomyRequestForm myForm("myForm");
 	std::cout << myForm << std::endl;
 	std::cout << *Arthur << std::endl;
 	try {
@@ -65,7 +65,8 @@ int main(void) {
 
 	std::cout << std::endl << "-----------DOWNGRADE BUREAUCRAT-----------" << std::endl;
 	while (Arthur->getGrade() < 145) {
-		std::cout << *Arthur << std::endl;
+		if (Arthur->getGrade() % 10 == 0)
+			std::cout << *Arthur << std::endl;
 		Arthur->downGrade();
 	}
 	std::cout << *Arthur << std::endl;

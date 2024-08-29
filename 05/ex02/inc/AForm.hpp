@@ -6,14 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:00:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 14:08:28 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 14:32:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AFORM_HPP
 # define AFORM_HPP
-
-# define NO_EXCEPTION	""
 
 # include <string>
 
