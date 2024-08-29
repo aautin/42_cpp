@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:00:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 14:32:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:30:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ class AForm
 		/* >------ Cons/Destructors ------< */
 		AForm(std::string const &name = DEFAULT_NAME,
 			int const toSign = DEFAULT_GRADE, int const toExecute = DEFAULT_GRADE);
-		~AForm();
+		virtual ~AForm();
 		AForm(AForm const &other);
 
 		/* >------ Get/Setters ------< */
