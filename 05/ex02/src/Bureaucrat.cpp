@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:15:05 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:11:13 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:23:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,15 @@ void Bureaucrat::signForm(AForm const &form, std::string const &reason) const {
 	}
 
 	std::cout << _name << " couldn't sign " << form.getName()
+		<< " because: " << reason + "." << std::endl;
+}
+void Bureaucrat::executeForm(AForm const &form, std::string const &reason) const {
+	if (reason.empty()) {
+		std::cout << _name << " executed " << form.getName() << "." << std::endl;
+		return ;
+	}
+
+	std::cout << _name << " couldn't executed " << form.getName()
 		<< " because: " << reason + "." << std::endl;
 }
 /* <----------------------------> */

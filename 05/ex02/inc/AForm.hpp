@@ -6,12 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 18:00:41 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:15:50 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:30:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AFORM_HPP
 # define AFORM_HPP
+
+# define NO_EXCEPTION	""
 
 # include <string>
 
@@ -35,6 +37,7 @@ class AForm
 
 		/* >------ Others ------< */
 		void			beSigned(Bureaucrat const &signatory);
+		virtual void	execute(Bureaucrat const &executor) const = 0;
 
 		/* >------ Overloads ------< */
 		AForm			&operator=(AForm const &other);
@@ -64,6 +67,7 @@ class AForm
 				FormNotSigned() {}
 				virtual const char*	what() const throw() { return "Form not signed"; }
 		};
+
 	private:
 		std::string const	_name;
 		bool				_isSigned;

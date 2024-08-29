@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:20:42 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:32:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,14 @@ int main(void) {
 	std::cout << *Arthur << std::endl;
 	try {
 		myForm.beSigned(*Arthur);
-		Arthur->signForm(myForm, "");
+		Arthur->signForm(myForm, NO_EXCEPTION);
+		try {
+			myForm.execute(*Arthur);
+			Arthur->executeForm(myForm, NO_EXCEPTION);
+		}
+		catch (IException &e) {
+			Arthur->executeForm(myForm, e.what());
+		}
 	}
 	catch (IException &e) {
 		Arthur->signForm(myForm, e.what());

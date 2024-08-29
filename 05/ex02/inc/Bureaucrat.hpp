@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:03:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 13:16:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/29 13:22:32 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ class Bureaucrat
 
 		/* >------ Others ------< */
 		void		signForm(AForm const &form, std::string const &reason) const;
+		void		executeForm(AForm const &form, std::string const &reason) const;
 
 		/* >------ Exceptions ------< */
 		class GradeTooHighException : public IException
