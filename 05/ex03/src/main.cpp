@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:41:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 17:33:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/30 10:39:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int main(void) {
 	Bureaucrat *President;
 	try {
 		President = new Bureaucrat("Emmanuel Macron", 1);
-		PresidentialPardonForm myForm3("myForm3");
+		PresidentialPardonForm myForm3("Pop Smoke");
 		std::cout << myForm3 << std::endl;
 		std::cout << *President << std::endl;
 		try {
@@ -126,7 +126,21 @@ int main(void) {
 		std::cout << "Here is my error : " << e.what() << std::endl;
 	}
 
-	std::cout << std::endl << "-----------CREATE AND TRY INTERN-----------" << std::endl;
+	std::cout << std::endl << "-----------CREATE AND TRY INTERN (FAIL)-----------" << std::endl;
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		
+		try {
+			rrf = someRandomIntern.makeForm("doesnt exist", "Bender");
+			delete rrf;
+		}
+		catch (Intern::FormUnknownException const &e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	std::cout << std::endl << "-----------CREATE AND TRY INTERN (SUCCESS)-----------" << std::endl;
 	{
 		Intern someRandomIntern;
 		AForm* rrf;

@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:27:05 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 17:23:42 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/30 10:36:57 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ class Intern
 		{
 			public:
 				FormUnknownException() {}
-				virtual const char* what() const throw() { return "The intern doesn't know this form name" ; }
+				virtual const char* what() const throw() { return "Intern doesn't know this form name" ; }
 		};
 
 		/* since Intern has no attributes, operator= overloads is not needed */

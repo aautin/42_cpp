@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:17:49 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/29 17:19:22 by aautin           ###   ########.fr       */
+/*   Updated: 2024/08/30 10:36:17 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ AForm *Intern::makeForm(std::string const &formName, std::string const &target) 
 	AForm* (*forms[3])(std::string const &) = { &createShrubberyForm, &createRobotomyForm, &createPresidentialForm };
 
 	for (int i = 0; i < 3; i++) {
-		if (formName.compare(formNames[i]) == 0)
+		if (formName.compare(formNames[i]) == 0) {
+			std::cout << "Intern creates " + formNames[i] << std::endl;
 			return forms[i](target);
+		}
 	}
 
 	throw FormUnknownException();

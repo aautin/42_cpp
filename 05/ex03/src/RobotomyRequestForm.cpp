@@ -19,7 +19,7 @@
 
 /* >----------- Cons/Destructors -----------< */
 RobotomyRequestForm::RobotomyRequestForm(std::string const &target)
-	: AForm("ShrubberyCreation", 72, 45), _target(target) {
+	: AForm("RobotomyRequest", 72, 45), _target(target) {
 	std::cout << _target << ": RobotomyRequest default constructor called" << std::endl;
 }
 

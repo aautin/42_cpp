@@ -19,7 +19,7 @@
 
 /* >----------- Cons/Destructors -----------< */
 PresidentialPardonForm::PresidentialPardonForm(std::string const &target)
-	: AForm("ShrubberyCreation", 25, 5), _target(target) {
+	: AForm("PresidentialPardon", 25, 5), _target(target) {
 	std::cout << _target << ": PresidentialPardon default constructor called" << std::endl;
 }
 
