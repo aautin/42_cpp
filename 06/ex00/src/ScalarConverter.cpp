@@ -6,49 +6,46 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/08/30 11:55:35 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:34:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <bitset>
+#include <climits>
 #include <iostream>
+#include <string>
 
 #include "ScalarConverter.hpp"
 
-static char toChar(std::string const &literal) {
-	char buffer = 0;
-	(void) literal;
-
-	return buffer;
+static double stod(std::string const &literal, int const type) {
+		
 }
 
-static int toInt(std::string const &literal) {
-	int buffer = 0;
-	(void) literal;
+static int	getType(std::string &literal) {
+	if (*literal.begin() == '\'' && *literal.end() == '\'' && literal.length() == 3)
+		return CHAR;
 
-	return buffer;
-}
+	if (literal == "nan" || literal == "-inf" || literal == "+inf")
+		return DOUBLE;
 
-static float toFloat(std::string const &literal) {
-	float buffer = 0;
-	(void) literal;
+	if (literal == "nanf" || literal == "-inff" || literal == "+inff")
+		return FLOAT;
 
-	return buffer;
-}
+	for (std::string::iterator it = literal.begin(); it != literal.end(); it++) {
+		if (!isdigit(*it) && *it != '.') {
+			if (*it == 'f' && it + 1 == literal.end())
+				return FLOAT;
+			return NONE;
+		}
+	}
 
-static double toDouble(std::string const &literal) {
-	double buffer = 0;
-	(void) literal;
+	if (literal.find('.', 0) == std::string::npos
+		|| literal.find('.', 0) == literal.rfind('.', 0))
+		return NONE;
 
-	return buffer;
+	return DOUBLE;	
 }
 
 void ScalarConverter::convert(std::string const &literal) {
-	char charType = toChar(literal);
-	if (0 <= charType && charType <= 31)
-		std::cout << "char: " << "Non displayable" << std::endl;
-	else
-		std::cout << "char: " << charType << std::endl;
-	std::cout << "int: " << toInt(literal) << std::endl;
-	std::cout << "float: " << toFloat(literal) << std::endl;
-	std::cout << "double: " << toDouble(literal) << std::endl;
+	
 }
