@@ -2,7 +2,7 @@ NAME := a.out
 
 CC := c++
 FILE_TYPE := cpp
-CFLAGS := -Werror -Wall -Wextra -std=c++98 -MMD -MP
+CFLAGS := -Werror -Wall -Wextra -std=c++98 -MMD -MP -g3
 
 SRC_PATH := src/
 OBJ_PATH := obj/
