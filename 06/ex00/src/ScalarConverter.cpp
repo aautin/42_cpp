@@ -6,11 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/17 16:48:37 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/17 17:37:50 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib> //atoi
+#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -76,20 +77,14 @@ static double floatStringToDouble(std::string &literal) {
 }
 /* <----------------------------> */
 
-/* >----------- Double->Other-types conversions -----------< */
-static char doubleToChar(double const input) {
-	return static_cast<char>(input);
-}
-static int doubleToInt(double const input) {
-	return static_cast<int>(input);
-}
-static float doubleToFloat(double const input) {
-	return static_cast<float>(input);
-}
-/* <----------------------------> */
-
 
 /* >----------- Print -----------< */
+static std::string getPrecision(float input) {
+	if (input == static_cast<float>(static_cast<int>(input)))
+		return ".0";
+	else
+		return "";
+}
 static void notypeExceptionPrint() {
 	std::cout << "Literal incorrect." << std::endl;	
 	throw ScalarConverter::ConverterException();
@@ -110,13 +105,13 @@ static void	doubleExceptionPrint(std::string const &literal) {
 	throw ScalarConverter::ConverterException();
 }
 static void printConversions(double const input) {
-	if (0 <= input && input <= 31)
+	if (0 <= static_cast<char>(input) && static_cast<char>(input) <= 31)
 		std::cout << "char: Non displayable" << std::endl;
 	else
-		std::cout << "char: '" << doubleToChar(input) << "'" << std::endl;
-	std::cout << "int: " << doubleToInt(input) << std::endl;
-	std::cout << "float: " << doubleToFloat(input) << "f" << std::endl;
-	std::cout << "double: " << input << std::endl;
+		std::cout << "char: '" << static_cast<char>(input) << "'" << std::endl;
+	std::cout << "int: " << static_cast<int>(input) << std::endl;
+	std::cout << "float: " << static_cast<float>(input) << getPrecision(input) << "f" << std::endl;
+	std::cout << "double: " << input << getPrecision(input) << std::endl;
 }
 /* <----------------------------> */
 
