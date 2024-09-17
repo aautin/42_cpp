@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/17 16:39:08 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:48:37 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,18 @@ static double floatStringToDouble(std::string &literal) {
 }
 /* <----------------------------> */
 
+/* >----------- Double->Other-types conversions -----------< */
+static char doubleToChar(double const input) {
+	return static_cast<char>(input);
+}
+static int doubleToInt(double const input) {
+	return static_cast<int>(input);
+}
+static float doubleToFloat(double const input) {
+	return static_cast<float>(input);
+}
+/* <----------------------------> */
+
 
 /* >----------- Print -----------< */
 static void notypeExceptionPrint() {
@@ -96,6 +108,15 @@ static void	doubleExceptionPrint(std::string const &literal) {
 	std::cout << "float: " << literal << "f" << std::endl;
 	std::cout << "double: " << literal << std::endl;
 	throw ScalarConverter::ConverterException();
+}
+static void printConversions(double const input) {
+	if (0 <= input && input <= 31)
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << doubleToChar(input) << "'" << std::endl;
+	std::cout << "int: " << doubleToInt(input) << std::endl;
+	std::cout << "float: " << doubleToFloat(input) << "f" << std::endl;
+	std::cout << "double: " << input << std::endl;
 }
 /* <----------------------------> */
 
@@ -144,7 +165,7 @@ void ScalarConverter::convert(std::string &literal) {
 				doubleExceptionPrint(literal);
 		}
 		double convertedNumber = stringToDouble[literalType](literal);
-		std::cout << convertedNumber << std::endl;
+		printConversions(convertedNumber);
 	}
 	catch (...) {}
 }
