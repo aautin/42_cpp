@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/17 16:31:15 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:39:08 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,21 @@ static void notypeExceptionPrint() {
 	throw ScalarConverter::ConverterException();
 }
 static void	floatExceptionPrint(std::string const &literal) {
-	(void) literal;
+	std::string doubleFormat = literal.substr(0, literal.length() - 1);
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: " << literal << std::endl;
+	std::cout << "double: " << doubleFormat << std::endl;
 	throw ScalarConverter::ConverterException();
 }
 static void	doubleExceptionPrint(std::string const &literal) {
-	(void) literal;
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: " << literal << "f" << std::endl;
+	std::cout << "double: " << literal << std::endl;
 	throw ScalarConverter::ConverterException();
 }
 /* <----------------------------> */
-
 
 
 static void	printType(int const type) {
