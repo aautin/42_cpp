@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/16 18:11:49 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/17 16:31:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ScalarConverter.hpp"
 
 static int getType(std::string &literal) {
-	if (*literal.begin() == '\'' && *literal.end() == '\'' && literal.length() == 3)
+	if (literal.length() == 3 && literal.at(0) == '\'' && literal.at(2) == '\'')
 		return CHAR;
 
 	if (literal == "nan" || literal == "-inf" || literal == "+inf")
@@ -39,7 +39,7 @@ static int getType(std::string &literal) {
 	if (literal.find('.') == literal.rfind('.'))
 		return DOUBLE;
 
-	return NONE;	
+	return NONE;
 }
 static double integerToFractional(int number) {
 	double	divisor = 10.0;
@@ -93,6 +93,32 @@ static void	doubleExceptionPrint(std::string const &literal) {
 /* <----------------------------> */
 
 
+
+static void	printType(int const type) {
+	switch (type) {
+		case CHAR:
+			std::cout << "CHAR" << std::endl;
+			break;
+		case INT:
+			std::cout << "INT" << std::endl;
+			break;
+		case FLOAT:
+			std::cout << "FLOAT" << std::endl;
+			break;
+		case DOUBLE:
+			std::cout << "DOUBLE" << std::endl;
+			break;
+		case FLOAT_EXCEPTION:
+			std::cout << "FLOAT_EXCEPTION" << std::endl;
+			break;
+		case DOUBLE_EXCEPTION:
+			std::cout << "DOUBLE_EXCEPTION" << std::endl;
+			break;
+		case NONE:
+			std::cout << "NONE" << std::endl;
+			break;
+	}
+}
 void ScalarConverter::convert(std::string &literal) {
 	double	(*stringToDouble[4])(std::string &literal) = {
 		&charStringToDouble, &intStringToDouble,
@@ -100,6 +126,7 @@ void ScalarConverter::convert(std::string &literal) {
 	};
 
 	int const literalType = getType(literal);
+	printType(literalType);
 
 	try {
 		switch (literalType) {
