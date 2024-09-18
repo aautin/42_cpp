@@ -6,11 +6,11 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/17 17:37:50 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/18 15:40:12 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdlib> //atoi
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -18,7 +18,7 @@
 #include "ScalarConverter.hpp"
 
 static int getType(std::string &literal) {
-	if (literal.length() == 3 && literal.at(0) == '\'' && literal.at(2) == '\'')
+	if (literal.length() == 1 && isascii(literal.at(0)))
 		return CHAR;
 
 	if (literal == "nan" || literal == "-inf" || literal == "+inf")
@@ -42,32 +42,14 @@ static int getType(std::string &literal) {
 
 	return NONE;
 }
-static double integerToFractional(int number) {
-	double	divisor = 10.0;
-	while (number / divisor >= 1.0)
-		divisor *= 10;
-	return static_cast<double>(number) / divisor;
-}
+
 
 /* >----------- String->Double conversion -----------< */
 static double doubleStringToDouble(std::string &literal) {
-	std::string::iterator it;
-	for (it = literal.begin(); it != literal.end(); it++) {
-		if (*it == '.') {
-			it++;
-			break;
-		}
-	}
-	int	integerPart = atoi(literal.c_str());
-	int	fractionalPart;
-	if (it == literal.end())
-		fractionalPart = 0;
-	else
-		fractionalPart = atoi(literal.substr(it - literal.begin()).c_str());
-	return static_cast<double>(integerPart) + integerToFractional(fractionalPart);
+	return std::strtod(literal.c_str(), NULL);
 }
 static double charStringToDouble(std::string &literal) {
-	return literal.at(1);
+	return literal.at(0);
 }
 static double intStringToDouble(std::string &literal) {
 	return static_cast<int>(doubleStringToDouble(literal));
@@ -80,7 +62,7 @@ static double floatStringToDouble(std::string &literal) {
 
 /* >----------- Print -----------< */
 static std::string getPrecision(float input) {
-	if (input == static_cast<float>(static_cast<int>(input)))
+	if (input == static_cast<float>(static_cast<long long>(input)))
 		return ".0";
 	else
 		return "";
@@ -89,15 +71,7 @@ static void notypeExceptionPrint() {
 	std::cout << "Literal incorrect." << std::endl;	
 	throw ScalarConverter::ConverterException();
 }
-static void	floatExceptionPrint(std::string const &literal) {
-	std::string doubleFormat = literal.substr(0, literal.length() - 1);
-	std::cout << "char: impossible" << std::endl;
-	std::cout << "int: impossible" << std::endl;
-	std::cout << "float: " << literal << std::endl;
-	std::cout << "double: " << doubleFormat << std::endl;
-	throw ScalarConverter::ConverterException();
-}
-static void	doubleExceptionPrint(std::string const &literal) {
+static void	fractionalExceptionPrint(std::string const &literal) {
 	std::cout << "char: impossible" << std::endl;
 	std::cout << "int: impossible" << std::endl;
 	std::cout << "float: " << literal << "f" << std::endl;
@@ -105,10 +79,10 @@ static void	doubleExceptionPrint(std::string const &literal) {
 	throw ScalarConverter::ConverterException();
 }
 static void printConversions(double const input) {
-	if (0 <= static_cast<char>(input) && static_cast<char>(input) <= 31)
-		std::cout << "char: Non displayable" << std::endl;
-	else
+	if (isprint(static_cast<char>(input)))
 		std::cout << "char: '" << static_cast<char>(input) << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
 	std::cout << "int: " << static_cast<int>(input) << std::endl;
 	std::cout << "float: " << static_cast<float>(input) << getPrecision(input) << "f" << std::endl;
 	std::cout << "double: " << input << getPrecision(input) << std::endl;
@@ -116,31 +90,6 @@ static void printConversions(double const input) {
 /* <----------------------------> */
 
 
-static void	printType(int const type) {
-	switch (type) {
-		case CHAR:
-			std::cout << "CHAR" << std::endl;
-			break;
-		case INT:
-			std::cout << "INT" << std::endl;
-			break;
-		case FLOAT:
-			std::cout << "FLOAT" << std::endl;
-			break;
-		case DOUBLE:
-			std::cout << "DOUBLE" << std::endl;
-			break;
-		case FLOAT_EXCEPTION:
-			std::cout << "FLOAT_EXCEPTION" << std::endl;
-			break;
-		case DOUBLE_EXCEPTION:
-			std::cout << "DOUBLE_EXCEPTION" << std::endl;
-			break;
-		case NONE:
-			std::cout << "NONE" << std::endl;
-			break;
-	}
-}
 void ScalarConverter::convert(std::string &literal) {
 	double	(*stringToDouble[4])(std::string &literal) = {
 		&charStringToDouble, &intStringToDouble,
@@ -148,16 +97,14 @@ void ScalarConverter::convert(std::string &literal) {
 	};
 
 	int const literalType = getType(literal);
-	printType(literalType);
-
 	try {
 		switch (literalType) {
 			case NONE:
 				notypeExceptionPrint();
 			case FLOAT_EXCEPTION:
-				floatExceptionPrint(literal);
+				fractionalExceptionPrint(literal.substr(0, literal.length() - 1));
 			case DOUBLE_EXCEPTION:
-				doubleExceptionPrint(literal);
+				fractionalExceptionPrint(literal);
 		}
 		double convertedNumber = stringToDouble[literalType](literal);
 		printConversions(convertedNumber);
