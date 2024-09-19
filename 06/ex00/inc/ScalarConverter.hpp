@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:32:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/19 15:22:52 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/20 14:42:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,20 @@ typedef enum e_type {
 	NONE
 }	t_type;
 
+typedef enum e_overflows {
+	NO_OVERFLOW = 0,
+	CHAR_OF = (1 << 0),
+	INT_OF = (1 << 1),
+	FLOAT_OF = (1 << 2),
+	DOUBLE_OF = (1 << 3)
+}	t_overflows;
+
 typedef struct s_scalar {
 	char	c;
 	int		i;
 	float	f;
 	double	d;
+	int		status;
 }	t_scalar;
 
 class ScalarConverter
@@ -38,7 +47,16 @@ class ScalarConverter
 	public:
 		static void	convert(std::string &literal);
 
-		class Exception : public std::exception {};
+		class Type : public std::exception {};
+		class Overflow : public std::exception {
+			public:
+				Overflow(std::string const &type) throw() : _type(type) {}
+				~Overflow() throw() {}
+				const char*	what() const throw() { return _type.c_str(); }
+
+			private:
+				std::string _type;
+		};
 };
 
 #endif
