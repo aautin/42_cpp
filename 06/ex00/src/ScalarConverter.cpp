@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/18 15:40:12 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:24:49 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ static int getType(std::string &literal) {
 
 
 /* >----------- String->Double conversion -----------< */
-static double doubleStringToDouble(std::string &literal) {
-	return std::strtod(literal.c_str(), NULL);
+static void charString(std::string &literal) {
+	t_scalar number = {
+		literal.at(0),
+		static_cast<int>(number.c),
+		static_cast<float>(number.c),
+		static_cast<>
+	};
 }
-static double charStringToDouble(std::string &literal) {
-	return literal.at(0);
+static void intString(std::string &literal) {
 }
-static double intStringToDouble(std::string &literal) {
-	return static_cast<int>(doubleStringToDouble(literal));
+static void floatString(std::string &literal) {
 }
-static double floatStringToDouble(std::string &literal) {
-	return static_cast<float>(doubleStringToDouble(literal));
+static void doubleString(std::string &literal) {
 }
 /* <----------------------------> */
 
@@ -69,31 +71,22 @@ static std::string getPrecision(float input) {
 }
 static void notypeExceptionPrint() {
 	std::cout << "Literal incorrect." << std::endl;	
-	throw ScalarConverter::ConverterException();
+	throw ScalarConverter::Exception();
 }
 static void	fractionalExceptionPrint(std::string const &literal) {
 	std::cout << "char: impossible" << std::endl;
 	std::cout << "int: impossible" << std::endl;
 	std::cout << "float: " << literal << "f" << std::endl;
 	std::cout << "double: " << literal << std::endl;
-	throw ScalarConverter::ConverterException();
-}
-static void printConversions(double const input) {
-	if (isprint(static_cast<char>(input)))
-		std::cout << "char: '" << static_cast<char>(input) << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << static_cast<int>(input) << std::endl;
-	std::cout << "float: " << static_cast<float>(input) << getPrecision(input) << "f" << std::endl;
-	std::cout << "double: " << input << getPrecision(input) << std::endl;
+	throw ScalarConverter::Exception();
 }
 /* <----------------------------> */
 
 
 void ScalarConverter::convert(std::string &literal) {
-	double	(*stringToDouble[4])(std::string &literal) = {
-		&charStringToDouble, &intStringToDouble,
-		&floatStringToDouble, &doubleStringToDouble
+	void	(*stringConverters[4])(std::string &literal) = {
+		&charString, &intString,
+		&floatString, &doubleString
 	};
 
 	int const literalType = getType(literal);
@@ -106,8 +99,7 @@ void ScalarConverter::convert(std::string &literal) {
 			case DOUBLE_EXCEPTION:
 				fractionalExceptionPrint(literal);
 		}
-		double convertedNumber = stringToDouble[literalType](literal);
-		printConversions(convertedNumber);
+		stringConverters[literalType](literal);
 	}
 	catch (...) {}
 }

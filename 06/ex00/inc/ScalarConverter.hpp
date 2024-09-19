@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:32:58 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/16 16:29:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:22:52 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,19 @@ typedef enum e_type {
 	NONE
 }	t_type;
 
+typedef struct s_scalar {
+	char	c;
+	int		i;
+	float	f;
+	double	d;
+}	t_scalar;
+
 class ScalarConverter
 {
 	public:
 		static void	convert(std::string &literal);
 
-		class ConverterException : public std::exception {};
+		class Exception : public std::exception {};
 };
 
 #endif
