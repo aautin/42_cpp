@@ -6,15 +6,15 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/20 14:46:40 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/20 15:27:42 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdlib>
 #include <cerrno>
+#include <cstdlib>
 #include <iostream>
-#include <string>
 #include <limits>
+#include <string>
 
 #include "ScalarConverter.hpp"
 
@@ -126,10 +126,10 @@ static void doubleString(std::string &literal) {
 
 /* >----------- Print -----------< */
 static std::string getPrecision(float input) {
-	if (input == static_cast<float>(static_cast<long long>(input)))
-		return ".0";
-	else
+	if (input >= 1000000 || input != static_cast<float>(static_cast<long long>(input)))
 		return "";
+	else
+		return ".0";
 }
 static void notypeExceptionPrint() {
 	std::cout << "Literal incorrect." << std::endl;	
@@ -154,7 +154,7 @@ static void printScalar(t_scalar *nb) {
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << nb->d << std::endl;
-	
+
 	if (nb->status & FLOAT_OF)
 		std::cout << "float: impossible" << std::endl;
 	else
