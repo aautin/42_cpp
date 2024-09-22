@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:36:11 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/20 15:27:42 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/22 13:13:07 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static void printScalar(t_scalar *nb) {
 	if (nb->status & INT_OF)
 		std::cout << "int: impossible" << std::endl;
 	else
-		std::cout << "int: " << nb->d << std::endl;
+		std::cout << "int: " << nb->i << std::endl;
 
 	if (nb->status & FLOAT_OF)
 		std::cout << "float: impossible" << std::endl;
