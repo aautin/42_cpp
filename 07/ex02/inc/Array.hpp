@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:08:45 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/23 18:47:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/24 11:47:53 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ template <typename Type> class Array
 {
 	public:
 		/* >------ Cons/Destructors ------< */
-		Array() : _array(new Type[0]), _size(0) {}
-		Array(int size) : _array(new Type[size]), _size(size) {}
+		Array() : _array(new Type[0]()), _size(0) {}
+		Array(int size) : _array(new Type[size]()), _size(size) {}
 		Array(Array const & other)
 		: _array(new Type[other._size]), _size(other._size) {
 			for (int i = 0; i < _size; i++)
