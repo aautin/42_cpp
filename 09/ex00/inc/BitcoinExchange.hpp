@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/26 16:49:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/28 20:03:48 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define BITCOIN_EXCHANGE_HPP
 
 # include <string>
+# include <utility>
 # include <vector>
 
 typedef struct sDate {
@@ -27,23 +28,30 @@ typedef struct sDate {
 typedef struct sTrackerPoint {
 	tDate	date;
 	float	value;
-}	trackerPoint;
+}	trackPoint;
 
 class BitcoinExchange
 {
 	public:
 		/* >------ Cons/Destructors ------< */
-		BitcoinExchange(std::string const & coinTrackerFilename = "data.csv",
-			std::string const & wealthTrackerFilename = "input.txt");
+		BitcoinExchange(
+			std::string const & coinTrackerFile = "data.csv",
+			std::string const & belongingsTrackerFile = "input.txt");
 		BitcoinExchange(BitcoinExchange const & other);
-		~BitcoinExchange();
+		~BitcoinExchange() {}
 		
 		/* >------ Overloads ------< */
 		BitcoinExchange&	operator=(BitcoinExchange const & other);
 
+		/* >------ Trackers ------< */
+		void	trackCoin(std::string const & coinTrackerFile);
+		void	trackBelongings(std::string const & belongingsTrackerFile);
+		void	trackValues();
+
 	private:
-		std::vector<trackerPoint> _coinTracker;
-		std::vector<trackerPoint> _wealthTracker;
+		std::vector<trackPoint>	_coinTracker;
+		std::vector<trackPoint>	_belongingsTracker;
+		std::vector<trackPoint>	_valuesTracker;
 };
 
 #endif
