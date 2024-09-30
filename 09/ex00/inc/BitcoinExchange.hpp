@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 17:40:36 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:08:38 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ class Date
 			return false;
 		}
 
+		/* >------ Getters ------< */
+		int	getYear() const { return _year; }
+		int	getMonth() const { return _month; }
+		int	getDay() const { return _day; }
+
 	private:
-		unsigned int	_year;
-		unsigned int	_month;
-		unsigned int	_day;
+		int	_year;
+		int	_month;
+		int	_day;
 };
 
 class BitcoinExchange

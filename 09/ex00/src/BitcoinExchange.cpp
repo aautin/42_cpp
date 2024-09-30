@@ -6,15 +6,18 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 17:42:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:14:44 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 #include <exception>
 #include <fstream>
+#include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <limits>
+#include <sstream>
 
 #include "BitcoinExchange.hpp"
 
@@ -73,7 +76,7 @@ static Date strToKey(std::string const & str) {
 	long month = strtod(&str[5], NULL);
 	long day = strtod(&str[8], NULL);
 
-	if (year < 0 || month < 0 || day < 0)
+	if (year < 0 || month <= 0 || day <= 0)
 		throw std::exception();
 	if (year > 2024 || month > 12 || day > 31)
 		throw std::exception();
@@ -95,6 +98,21 @@ static float strToValue(std::string const & str) {
 		throw std::exception();
 
 	return value;
+}
+
+std::string formatDate(int year, int month, int day) {
+    std::ostringstream oss;
+
+    // Set padding for the year (4 digits)
+    oss << std::setw(4) << std::setfill('0') << year << '-';
+
+    // Set padding for the month (2 digits)
+    oss << std::setw(2) << std::setfill('0') << month << '-';
+
+    // Set padding for the day (2 digits)
+    oss << std::setw(2) << std::setfill('0') << day;
+
+    return oss.str();
 }
 /* <----------------------------> */
 
@@ -164,7 +182,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 	}
 }
 
-static Date findClosest(Date const &it) {
+static Date closestDate(Date const &it) {
 	
 }
 
@@ -176,10 +194,12 @@ void BitcoinExchange::printValues() {
 			value = _coinTracker[it->first];
 		}
 		catch (std::out_of_range const &e) {
-			value = _coinTracker[findClosest(it->first)];
-			continue ;
+			value = _coinTracker[closestDate(it->first)];
 		}
-		/* print "YEAR-MONTH-DAY => belongingsQuantity => belongingsValue "*/
+
+		/* print "YEAR-MONTH-DAY => belongingsQuantity = belongingsValue "*/
+		std::cout << formatDate(it->first.getYear(), it->first.getMonth(), it->first.getDay());
+		std::cout << " => " << it->second << " = " << value * it->second << std::endl;
 	}
 }
 /* <----------------------------> */
