@@ -6,12 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 16:02:17 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:56:48 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include <exception>
 #include <fstream>
+#include <limits>
 
 #include "BitcoinExchange.hpp"
 
@@ -55,6 +57,42 @@ static std::string getSeparator(
 
 	return separator;
 }
+
+static Date strToKey(std::string const & str) {
+	if (str.length() != 10 || str[4] != '-' || str[7] != '-')
+		throw std::exception();
+
+	std::string::const_iterator it;
+	for (it = str.begin(); it != str.end(); ++it) {
+		if (it - str.begin() != 4 && (it - str.begin() != 7) && !isdigit(*it))
+			throw std::exception();
+	}
+
+	long year = strtod(str.c_str(), NULL);
+	long month = strtod(&str[5], NULL);
+	long day = strtod(&str[8], NULL);
+
+	if (year < 0 || month < 0 || day < 0)
+		throw std::exception();
+	if (year > 2024 || month > 12 || day > 31)
+		throw std::exception();
+
+	return Date(year, month, day);
+}
+
+static float strToValue(std::string const & str) {
+	char *strPtr;
+	double value = strtod(str.c_str(), &strPtr);
+
+	if (*strPtr != '\0')
+		throw std::exception();
+
+	if (value < std::numeric_limits<float>::min()
+		|| value > std::numeric_limits<float>::max())
+		throw std::exception();
+
+	return value;
+}
 /* <----------------------------> */
 
 
@@ -80,12 +118,17 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const & other) {
 
 /* >----------- Trackers -----------< */
 void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
-	std::map<int, std::string>	content = fileToMap(coinTrackerFile);
-	std::string					separator = getSeparator(content, "date", "exchange_rate");
+	std::map<int, std:: string>	content = fileToMap(coinTrackerFile);
+	std::string					separator = getSeparator(content, LEFT_NAME, COIN_RIGHT_NAME);
 
 	std::map<int, std::string>::const_iterator it;
 	for (it = content.begin(); it != content.end(); ++it) {
-		
+		std::string	left = it->second.substr(0, it->second.find(separator));
+		std::string	right = it->second.substr(it->second.find(separator) + separator.length(),
+			it->second.length() - it->second.find(separator) + separator.length());
+
+		Date	key = strToKey(left);
+		float	value = strToValue(right);
 	}
 }
 

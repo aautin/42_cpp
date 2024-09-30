@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 15:35:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:16:45 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 #ifndef BITCOIN_EXCHANGE_HPP
 # define BITCOIN_EXCHANGE_HPP
+
+# define LEFT_NAME "date"
+# define COIN_RIGHT_NAME "exchange_rate"
+# define BELONGINGS_RIGHT_NAME "value"
 
 # include <string>
 # include <map>
