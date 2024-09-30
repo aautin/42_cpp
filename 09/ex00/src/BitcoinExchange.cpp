@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/28 20:30:13 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:02:17 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,44 @@
 #include "BitcoinExchange.hpp"
 
 /* >----------- Parsing -----------< */
-static std::vector<std::string> fileToVector(std::string const & file) {
-	std::vector<std::string> fileContent;
+static std::map<int, std::string> fileToMap(std::string const & file) {
+	std::map<int, std::string> fileContent;
 
 	std::fstream fileStream;
 	fileStream.open(file.c_str(), std::fstream::in);
 
-	std::string line;
+	std::string	line;
+	int			key = 0;
 	while (getline(fileStream, line))
-		fileContent.push_back(line);
+		fileContent[key++] = std::string(line);
 
 	fileStream.close();
 	return fileContent;
 }
 
 static std::string getSeparator(
-	std::vector<std::string> const & source,
+	std::map<int, std::string> & source,
 	std::string const & leftColumn,
 	std::string const & rightColumn) {
 
-	std::size_t	leftIndex = source.front().find(leftColumn);
-	std::size_t	rightIndex = source.front().find(rightColumn);
+	std::size_t	leftIndex = source[0].find(leftColumn);
+	std::size_t	rightIndex = source[0].find(rightColumn);
 	if (leftIndex == std::string::npos || rightIndex == std::string::npos
 		|| leftIndex + leftColumn.length() >= rightIndex)
 		throw std::exception();
 	
-	std::string separator = source.front().substr(leftIndex + leftColumn.length(),
+	std::string separator = source[0].substr(leftIndex + leftColumn.length(),
 		rightIndex - leftColumn.length());
 
-	std::vector<std::string>::const_iterator it = source.begin();
+	std::map<int, std::string>::const_iterator it = source.begin();
 	while (it != source.end()) {
-		if (it->find(separator) == std::string::npos
-			|| it->find(separator) == it->rfind(separator))
+		if (it->second.find(separator) == std::string::npos
+			|| it->second.find(separator) == it->second.rfind(separator))
 			throw std::exception();
 		it++;
 	}
 
 	return separator;
-}
-
-static std::pair<std::string, std::string> vectorToPair(
-	std::vector<std::string> const & source,
-	std::string const & separator) {
-
-	std::pair<std::string, std::string> myPair;
-
-	std::vector<std::string>::const_iterator it = source.begin();
-	while (it != source.end()) {
-		pair.
-	}
 }
 /* <----------------------------> */
 
@@ -91,7 +80,13 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const & other) {
 
 /* >----------- Trackers -----------< */
 void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
-	
+	std::map<int, std::string>	content = fileToMap(coinTrackerFile);
+	std::string					separator = getSeparator(content, "date", "exchange_rate");
+
+	std::map<int, std::string>::const_iterator it;
+	for (it = content.begin(); it != content.end(); ++it) {
+		
+	}
 }
 
 void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile) {

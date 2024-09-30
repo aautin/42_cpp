@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/28 20:03:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 15:35:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,39 @@
 # define BITCOIN_EXCHANGE_HPP
 
 # include <string>
-# include <utility>
-# include <vector>
+# include <map>
 
-typedef struct sDate {
-	int year;
-	int month;
-	int day;
-}	tDate;
+class Date
+{
+	public:
+		/* >------ Cons/Destructors ------< */
+		Date() : _year(0), _month(0), _day(0) {}
+		Date(int year, int month, int day)
+		: _year(year), _month(month), _day(day) {}
+		Date(Date const & other)
+		: _year(other._year), _month(other._month), _day(other._day) {}
+		~Date() {}
+		
+		/* >------ Overloads ------< */
+		Date&	operator=(Date const & other) {
+			_year = other._year;
+			_month = other._month;
+			_day = other._day;
+		}
+		bool	operator<(Date const & other) {
+			if (_year < other._year
+				|| _year == other._year && _month < other._month
+				|| (_year == other._year && _month == other._month
+					&& _day < other._day))
+					return true;
+			return false;
+		}
 
-typedef struct sTrackerPoint {
-	tDate	date;
-	float	value;
-}	trackPoint;
+	private:
+		unsigned int	_year;
+		unsigned int	_month;
+		unsigned int	_day;
+};
 
 class BitcoinExchange
 {
@@ -49,9 +69,9 @@ class BitcoinExchange
 		void	trackValues();
 
 	private:
-		std::vector<trackPoint>	_coinTracker;
-		std::vector<trackPoint>	_belongingsTracker;
-		std::vector<trackPoint>	_valuesTracker;
+		std::map<Date, float>	_coinTracker;
+		std::map<Date, float>	_belongingsTracker;
+		std::map<Date, float>	_valuesTracker;
 };
 
 #endif
