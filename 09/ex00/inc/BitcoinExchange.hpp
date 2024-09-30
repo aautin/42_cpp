@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 16:16:45 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 17:40:36 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ class BitcoinExchange
 		BitcoinExchange&	operator=(BitcoinExchange const & other);
 
 		/* >------ Trackers ------< */
-		void	trackCoin(std::string const & coinTrackerFile);
-		void	trackBelongings(std::string const & belongingsTrackerFile);
-		void	trackValues();
+		void				trackCoin(std::string const & coinTrackerFile);
+		void				trackBelongings(std::string const & belongingsTrackerFile);
+		void				printValues();
 
 	private:
 		std::map<Date, float>	_coinTracker;
 		std::map<Date, float>	_belongingsTracker;
-		std::map<Date, float>	_valuesTracker;
 };
 
 #endif

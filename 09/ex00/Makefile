@@ -1,4 +1,4 @@
-NAME := a.out
+NAME := btc
 
 CC := c++
 FILE_TYPE := cpp

@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 16:56:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/09/30 17:42:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 #include <exception>
 #include <fstream>
+#include <iostream>
 #include <limits>
 
 #include "BitcoinExchange.hpp"
@@ -88,7 +89,9 @@ static float strToValue(std::string const & str) {
 		throw std::exception();
 
 	if (value < std::numeric_limits<float>::min()
-		|| value > std::numeric_limits<float>::max())
+		|| value > std::numeric_limits<float>::max()
+		|| value < std::numeric_limits<int>::min()
+		|| value > std::numeric_limits<int>::max())
 		throw std::exception();
 
 	return value;
@@ -100,18 +103,23 @@ static float strToValue(std::string const & str) {
 BitcoinExchange::BitcoinExchange(
 	std::string const & coinTrackerFile = "data.csv",
 	std::string const & belongingsTrackerFile = "input.txt") {
-	
+	trackCoin(coinTrackerFile);
+	trackBelongings(belongingsTrackerFile);
+	printValues();
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & other) {
-	
+	*this = other;
 }
 /* <----------------------------> */
 
 
 /* >----------- Overloads -----------< */
 BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const & other) {
-	
+	_coinTracker = other._coinTracker;
+	_belongingsTracker = other._belongingsTracker;
+
+	return *this;
 }
 /* <----------------------------> */
 
@@ -119,7 +127,8 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const & other) {
 /* >----------- Trackers -----------< */
 void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 	std::map<int, std:: string>	content = fileToMap(coinTrackerFile);
-	std::string					separator = getSeparator(content, LEFT_NAME, COIN_RIGHT_NAME);
+	std::string					separator = getSeparator(content,
+														 LEFT_NAME, COIN_RIGHT_NAME);
 
 	std::map<int, std::string>::const_iterator it;
 	for (it = content.begin(); it != content.end(); ++it) {
@@ -129,14 +138,48 @@ void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 
 		Date	key = strToKey(left);
 		float	value = strToValue(right);
+
+		_coinTracker.insert(std::make_pair(key, value));
 	}
 }
 
 void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile) {
+	std::map<int, std:: string>	content = fileToMap(belongingsTrackerFile);
+	std::string					separator = getSeparator(content,
+														 LEFT_NAME, BELONGINGS_RIGHT_NAME);
+
+	std::map<int, std::string>::const_iterator it;
+	for (it = content.begin(); it != content.end(); ++it) {
+		std::string	left = it->second.substr(0, it->second.find(separator));
+		std::string	right = it->second.substr(it->second.find(separator) + separator.length(),
+			it->second.length() - it->second.find(separator) + separator.length());
+
+		Date	key = strToKey(left);
+		float	value = strToValue(right);
+
+		if (value < 0)
+			throw std::exception();
+
+		_belongingsTracker.insert(std::make_pair(key, value));
+	}
+}
+
+static Date findClosest(Date const &it) {
 	
 }
 
-void BitcoinExchange::trackValues() {
-	
+void BitcoinExchange::printValues() {
+	std::map<Date, float>::const_iterator it;
+	for (it = _belongingsTracker.begin(); it != _belongingsTracker.end(); ++it) {
+		float value;
+		try {
+			value = _coinTracker[it->first];
+		}
+		catch (std::out_of_range const &e) {
+			value = _coinTracker[findClosest(it->first)];
+			continue ;
+		}
+		/* print "YEAR-MONTH-DAY => belongingsQuantity => belongingsValue "*/
+	}
 }
 /* <----------------------------> */
