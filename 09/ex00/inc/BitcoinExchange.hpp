@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/01 13:59:26 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/01 18:59:07 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ class Date
 					return true;
 			return false;
 		}
+		int operator--() {
+			if (_day > 0)
+				_day--;
+			else if (_month > 0) {
+				_day = 31;
+				_month--;
+			}
+			else if (_year > 0) {
+				_day = 31;
+				_month = 12;
+				_year--;
+			}
+			else
+				return false;
+			return true;
+		}
 
 		/* >------ Getters ------< */
 		int	getYear() const { return _year; }
@@ -77,6 +93,7 @@ class BitcoinExchange
 		/* >------ Trackers ------< */
 		void				trackCoin(std::string const & coinTrackerFile);
 		void				trackBelongings(std::string const & belongingsTrackerFile);
+		float				closestValue(Date it);
 		void				printValues();
 
 	private:

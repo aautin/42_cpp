@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/01 13:57:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/01 19:20:02 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static Date strToKey(std::string const & str) {
 	long month = strtod(&str[5], NULL);
 	long day = strtod(&str[8], NULL);
 
-	if (year < 0 || month <= 0 || day <= 0)
+	if (year <= 0 || month <= 0 || day <= 0)
 		throw std::exception();
 	if (year > 2024 || month > 12 || day > 31)
 		throw std::exception();
@@ -182,8 +182,17 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 	}
 }
 
-static Date closestDate(Date const &it) {
-	return it;
+float BitcoinExchange::closestValue(Date it) {
+	while (--it == true) {
+		try {
+			if (_coinTracker[it])
+				return _coinTracker[it]; 
+		}
+		catch (...) {
+			continue ;
+		}
+	}
+	return _coinTracker.begin()->second;
 }
 
 void BitcoinExchange::printValues() {
@@ -194,7 +203,7 @@ void BitcoinExchange::printValues() {
 			value = _coinTracker[it->first];
 		}
 		catch (std::out_of_range const &e) {
-			value = _coinTracker[closestDate(it->first)];
+			value = closestValue(it->first);
 		}
 
 		/* print "YEAR-MONTH-DAY => belongingsQuantity = belongingsValue "*/
