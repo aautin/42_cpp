@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 18:14:44 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:57:41 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ std::string formatDate(int year, int month, int day) {
 
 /* >----------- Cons/Destructors -----------< */
 BitcoinExchange::BitcoinExchange(
-	std::string const & coinTrackerFile = "data.csv",
-	std::string const & belongingsTrackerFile = "input.txt") {
+	std::string const & coinTrackerFile,
+	std::string const & belongingsTrackerFile) {
 	trackCoin(coinTrackerFile);
 	trackBelongings(belongingsTrackerFile);
 	printValues();
@@ -183,7 +183,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 }
 
 static Date closestDate(Date const &it) {
-	
+	return it;
 }
 
 void BitcoinExchange::printValues() {

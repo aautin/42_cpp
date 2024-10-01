@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/30 18:08:38 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:59:26 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ class Date
 			_year = other._year;
 			_month = other._month;
 			_day = other._day;
+
+			return *this;
 		}
-		bool	operator<(Date const & other) {
+		bool	operator<(Date const & other) const {
 			if (_year < other._year
-				|| _year == other._year && _month < other._month
+				|| (_year == other._year && _month < other._month)
 				|| (_year == other._year && _month == other._month
 					&& _day < other._day))
 					return true;
@@ -64,8 +66,8 @@ class BitcoinExchange
 	public:
 		/* >------ Cons/Destructors ------< */
 		BitcoinExchange(
-			std::string const & coinTrackerFile = "data.csv",
-			std::string const & belongingsTrackerFile = "input.txt");
+			std::string const & coinTrackerFile,
+			std::string const & belongingsTrackerFile);
 		BitcoinExchange(BitcoinExchange const & other);
 		~BitcoinExchange() {}
 		
