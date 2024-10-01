@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:49:59 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/22 17:19:48 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:53:04 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,6 @@ int main() {
 	Base *ptr = generate();
 	identify(ptr);
 	identify(*ptr);
+
+	delete ptr;
 }
