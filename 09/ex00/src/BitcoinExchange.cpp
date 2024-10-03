@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/02 17:56:40 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/03 17:32:53 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 		if (value < 0)
 			throw std::exception();
 
-		_belongingsTracker.insert(i, std::make_pair(key, value));
+		_belongingsTracker.insert(std::make_pair(i , Pair(key, value)));
 		i++;
 	}
 }
@@ -200,20 +200,21 @@ float BitcoinExchange::closestValue(Date it) {
 }
 
 void BitcoinExchange::printValues() {
-	std::map<Date, float>::const_iterator it;
+	std::map<int, Pair>::const_iterator it;
 	for (it = _belongingsTracker.begin(); it != _belongingsTracker.end(); ++it) {
-		std::cout << it->second << std::endl;
 		float value;
 		try {
-			value = _coinTracker[it->first];
+			value = _coinTracker[it->second.getDate()];
 		}
 		catch (std::out_of_range const &e) {
-			value = closestValue(it->first);
+			value = closestValue(it->second.getDate());
 		}
 
 		/* print "YEAR-MONTH-DAY => belongingsQuantity = belongingsValue "*/
-		std::cout << formatDate(it->first.getYear(), it->first.getMonth(), it->first.getDay());
-		std::cout << " => " << it->second << " = " << value * it->second << std::endl;
+		std::cout << formatDate(it->second.getDate().getYear(),
+			it->second.getDate().getMonth(), it->second.getDate().getDay());
+		std::cout << " => " << it->second.getValue()
+			<< " = " << value * it->second.getValue() << std::endl;
 	}
 }
 /* <----------------------------> */

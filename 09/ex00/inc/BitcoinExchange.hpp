@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/02 17:59:14 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/03 17:21:16 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,32 @@ class Date
 		int	_day;
 };
 
+class Pair
+{
+	public:
+		/* >------ Cons/Destructors ------< */
+		Pair() : _date(Date()), _value(0) {}
+		Pair(Date &date, float value) : _date(date), _value(value) {}
+		Pair(Pair const & other) : _date(other._date), _value(other._value) {}
+		~Pair() {}
+		
+		/* >------ Overloads ------< */
+		Pair&	operator=(Pair const & other) {
+			_date = other._date;
+			_value = other._value;
+
+			return *this;
+		}
+
+		/* >------ Getters ------< */
+		float	getValue() const { return _value; }
+		Date	getDate() const { return _date; }
+
+	private:
+		Date	_date;
+		float	_value;
+};
+
 class BitcoinExchange
 {
 	public:
@@ -97,8 +123,8 @@ class BitcoinExchange
 		void				printValues();
 
 	private:
-		std::map<Date, float>					_coinTracker;
-		std::map<int, std::pair<Date, float> >	_belongingsTracker;
+		std::map<Date, float>	_coinTracker;
+		std::map<int, Pair>		_belongingsTracker;
 };
 
 #endif
