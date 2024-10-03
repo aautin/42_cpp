@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/01 18:59:07 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:59:14 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ class BitcoinExchange
 		void				printValues();
 
 	private:
-		std::map<Date, float>	_coinTracker;
-		std::map<Date, float>	_belongingsTracker;
+		std::map<Date, float>					_coinTracker;
+		std::map<int, std::pair<Date, float> >	_belongingsTracker;
 };
 
 #endif

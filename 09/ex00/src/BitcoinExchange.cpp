@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/01 19:20:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:56:40 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static std::string getSeparator(
 	std::map<int, std::string>::const_iterator it = source.begin();
 	while (it != source.end()) {
 		if (it->second.find(separator) == std::string::npos
-			|| it->second.find(separator) == it->second.rfind(separator))
+			|| it->second.find(separator) != it->second.rfind(separator))
 			throw std::exception();
 		it++;
 	}
@@ -91,7 +91,7 @@ static float strToValue(std::string const & str) {
 	if (*strPtr != '\0')
 		throw std::exception();
 
-	if (value < std::numeric_limits<float>::min()
+	if (value < -std::numeric_limits<int>::max()
 		|| value > std::numeric_limits<float>::max()
 		|| value < std::numeric_limits<int>::min()
 		|| value > std::numeric_limits<int>::max())
@@ -148,6 +148,8 @@ void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 	std::string					separator = getSeparator(content,
 														 LEFT_NAME, COIN_RIGHT_NAME);
 
+	content.erase(0);
+
 	std::map<int, std::string>::const_iterator it;
 	for (it = content.begin(); it != content.end(); ++it) {
 		std::string	left = it->second.substr(0, it->second.find(separator));
@@ -166,7 +168,10 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 	std::string					separator = getSeparator(content,
 														 LEFT_NAME, BELONGINGS_RIGHT_NAME);
 
+	content.erase(0);
+
 	std::map<int, std::string>::const_iterator it;
+	int i = 0;
 	for (it = content.begin(); it != content.end(); ++it) {
 		std::string	left = it->second.substr(0, it->second.find(separator));
 		std::string	right = it->second.substr(it->second.find(separator) + separator.length(),
@@ -178,7 +183,8 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 		if (value < 0)
 			throw std::exception();
 
-		_belongingsTracker.insert(std::make_pair(key, value));
+		_belongingsTracker.insert(i, std::make_pair(key, value));
+		i++;
 	}
 }
 
@@ -188,9 +194,7 @@ float BitcoinExchange::closestValue(Date it) {
 			if (_coinTracker[it])
 				return _coinTracker[it]; 
 		}
-		catch (...) {
-			continue ;
-		}
+		catch (...) {}
 	}
 	return _coinTracker.begin()->second;
 }
@@ -198,6 +202,7 @@ float BitcoinExchange::closestValue(Date it) {
 void BitcoinExchange::printValues() {
 	std::map<Date, float>::const_iterator it;
 	for (it = _belongingsTracker.begin(); it != _belongingsTracker.end(); ++it) {
+		std::cout << it->second << std::endl;
 		float value;
 		try {
 			value = _coinTracker[it->first];
