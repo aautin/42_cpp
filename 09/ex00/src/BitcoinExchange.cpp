@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/03 17:32:53 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/03 17:46:35 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,10 @@ float BitcoinExchange::closestValue(Date it) {
 	return _coinTracker.begin()->second;
 }
 
+static bool isInteger(float it) {
+	return (static_cast<float>(static_cast<long>(it)) == it) ? true : false;
+}
+
 void BitcoinExchange::printValues() {
 	std::map<int, Pair>::const_iterator it;
 	for (it = _belongingsTracker.begin(); it != _belongingsTracker.end(); ++it) {
@@ -213,8 +217,11 @@ void BitcoinExchange::printValues() {
 		/* print "YEAR-MONTH-DAY => belongingsQuantity = belongingsValue "*/
 		std::cout << formatDate(it->second.getDate().getYear(),
 			it->second.getDate().getMonth(), it->second.getDate().getDay());
-		std::cout << " => " << it->second.getValue()
-			<< " = " << value * it->second.getValue() << std::endl;
+		std::cout << " => " << it->second.getValue() << " = ";
+		if (isInteger(value * static_cast<long>(it->second.getValue())))
+			std::cout << static_cast<long>(value * it->second.getValue()) << std::endl;
+		else
+			std::cout << value * it->second.getValue() << std::endl;
 	}
 }
 /* <----------------------------> */
