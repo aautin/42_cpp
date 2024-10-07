@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/03 17:21:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/07 17:29:54 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #ifndef BITCOIN_EXCHANGE_HPP
 # define BITCOIN_EXCHANGE_HPP
 
-# define LEFT_NAME "date"
-# define COIN_RIGHT_NAME "exchange_rate"
-# define BELONGINGS_RIGHT_NAME "value"
+# define DATA_DEFAULT			"data.csv"
+# define INPUT_DEFAULT			"input"
+# define LEFT_NAME				"date"
+# define COIN_RIGHT_NAME		"exchange_rate"
+# define BELONGINGS_RIGHT_NAME	"value"
 
 # include <string>
 # include <map>
@@ -107,6 +109,7 @@ class BitcoinExchange
 {
 	public:
 		/* >------ Cons/Destructors ------< */
+		BitcoinExchange();
 		BitcoinExchange(
 			std::string const & coinTrackerFile,
 			std::string const & belongingsTrackerFile);
@@ -120,11 +123,22 @@ class BitcoinExchange
 		void				trackCoin(std::string const & coinTrackerFile);
 		void				trackBelongings(std::string const & belongingsTrackerFile);
 		float				closestValue(Date it);
-		void				printValues();
+
+		/* >------ Exceptions ------< */
+		class BitcoinException : public std::exception {
+			public:
+				BitcoinException(std::string const &type) throw() : _type(type) {}
+				~BitcoinException() throw() {}
+				const char*	what() const throw() { return _type.c_str(); }
+
+			private:
+				std::string _type;
+		};
 
 	private:
 		std::map<Date, float>	_coinTracker;
-		std::map<int, Pair>		_belongingsTracker;
+		void build(	std::string const & coinTrackerFile,
+					std::string const & belongingsTrackerFile);
 };
 
 #endif
