@@ -6,13 +6,17 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/07 17:44:52 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:41:09 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define DATA_DEFAULT			"data.csv"
+#define INPUT_DEFAULT			"input"
+#define LEFT_NAME				"date"
+#define COIN_RIGHT_NAME			"exchange_rate"
+#define BELONGINGS_RIGHT_NAME	"value"
+
 #include <cstdlib>
-#include <exception>
-#include <fstream>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -53,23 +57,23 @@ static std::string getSeparator(std::string const & source,
 }
 
 static Date strToKey(std::string const & str) {
-	// if (str.length() != 10 || str[4] != '-' || str[7] != '-')
-	// 	throw std::exception();
+	if (str.length() != 10 || str[4] != '-' || str[7] != '-')
+		throw BitcoinExchange::BitcoinException(str + " : not \"XXXX-XX-XX\" format");
 
-	// std::string::const_iterator it;
-	// for (it = str.begin(); it != str.end(); ++it) {
-	// 	if (it - str.begin() != 4 && (it - str.begin() != 7) && !isdigit(*it))
-	// 		throw std::exception();
-	// }
+	std::string::const_iterator it;
+	for (it = str.begin(); it != str.end(); ++it) {
+		if (it - str.begin() != 4 && (it - str.begin() != 7) && !isdigit(*it))
+			throw BitcoinExchange::BitcoinException(str + " : invalid/unrealistic date");
+	}
 
 	long year = strtod(str.c_str(), NULL);
 	long month = strtod(&str[5], NULL);
 	long day = strtod(&str[8], NULL);
 
-	// if (year <= 0 || month <= 0 || day <= 0)
-	// 	throw std::exception();
-	// if (year > 2024 || month > 12 || day > 31)
-	// 	throw std::exception();
+	if (year <= 0 || month <= 0 || day <= 0)
+		throw std::exception();
+	if (year > 2024 || month > 12 || day > 31)
+		throw BitcoinExchange::BitcoinException(str + " : invalid/unrealistic date");
 
 	return Date(year, month, day);
 }
@@ -77,15 +81,14 @@ static Date strToKey(std::string const & str) {
 static double strToValue(std::string const & str) {
 	char *strPtr;
 	double value = strtod(str.c_str(), &strPtr);
-
 	if (*strPtr != '\0')
-		throw std::exception();
+		throw BitcoinExchange::BitcoinException(str + " : incorrect input");
 
-	// if (value < -std::numeric_limits<int>::max()
-	// 	|| value > std::numeric_limits<float>::max()
-	// 	|| value < std::numeric_limits<int>::min()
-	// 	|| value > std::numeric_limits<int>::max())
-	// 	throw std::exception();
+	if (value < 0)
+		throw BitcoinExchange::BitcoinException(str + " : negative value");
+
+	if (value > 1000.0)
+		throw BitcoinExchange::BitcoinException(str + " : too large number");
 
 	return value;
 }
@@ -143,12 +146,16 @@ void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 
 	std::map<int, std::string>::const_iterator it;
 	for (it = content.begin(); it != content.end(); ++it) {
+		if (it->second.find(separator) == std::string::npos
+			|| it->second.find(separator) != it->second.rfind(separator))
+			throw BitcoinException(it->second + " : incorrect format");
+
 		std::string	left = it->second.substr(0, it->second.find(separator));
 		std::string	right = it->second.substr(it->second.find(separator) + separator.length(),
 			it->second.length() - it->second.find(separator) + separator.length());
 
 		Date	key = strToKey(left);
-		float	value = static_cast<float>(strToValue(right));
+		double	value = strToValue(right);
 
 		_coinTracker.insert(std::make_pair(key, value));
 	}
@@ -172,12 +179,19 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 				it->second.length() - it->second.find(separator) + separator.length());
 
 			Date	key = strToKey(left);
-			float	value = strToValue(right);
+			double	value = strToValue(right);
+			double	exchangeRate = closestValue(key);
 
-			value = closestValue(key);
-		
+			if (exchangeRate * value > std::numeric_limits<double>::max())
+				throw BitcoinException(it->second + " : \"value * exchangeRate\" is a too big number");
+
 			/* print "YEAR-MONTH-DAY => belongingsQuantity = belongingsValue "*/
-		
+			double result = exchangeRate * value;
+			if (result == static_cast<double>(static_cast<int>(result))) {
+				std::cout << formatDate(key) << " => " << value << " = " << static_cast<int>(result) << std::endl;
+			} else {
+				std::cout << formatDate(key) << " => " << value << " = " << result << std::endl;
+			}
 		}
 		catch (BitcoinException const & e) {
 			std::cout << e.what() << std::endl;
@@ -185,7 +199,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 	}
 }
 
-float closestValue(Date it) {
+double BitcoinExchange::closestValue(Date it) {
 	while (--it == true) {
 		try {
 			if (_coinTracker[it])

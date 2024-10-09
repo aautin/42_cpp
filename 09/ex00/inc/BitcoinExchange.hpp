@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/07 17:29:54 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:29:00 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 #ifndef BITCOIN_EXCHANGE_HPP
 # define BITCOIN_EXCHANGE_HPP
 
-# define DATA_DEFAULT			"data.csv"
-# define INPUT_DEFAULT			"input"
-# define LEFT_NAME				"date"
-# define COIN_RIGHT_NAME		"exchange_rate"
-# define BELONGINGS_RIGHT_NAME	"value"
-
+# include <exception>
 # include <string>
 # include <map>
 
@@ -79,32 +74,6 @@ class Date
 		int	_day;
 };
 
-class Pair
-{
-	public:
-		/* >------ Cons/Destructors ------< */
-		Pair() : _date(Date()), _value(0) {}
-		Pair(Date &date, float value) : _date(date), _value(value) {}
-		Pair(Pair const & other) : _date(other._date), _value(other._value) {}
-		~Pair() {}
-		
-		/* >------ Overloads ------< */
-		Pair&	operator=(Pair const & other) {
-			_date = other._date;
-			_value = other._value;
-
-			return *this;
-		}
-
-		/* >------ Getters ------< */
-		float	getValue() const { return _value; }
-		Date	getDate() const { return _date; }
-
-	private:
-		Date	_date;
-		float	_value;
-};
-
 class BitcoinExchange
 {
 	public:
@@ -122,21 +91,24 @@ class BitcoinExchange
 		/* >------ Trackers ------< */
 		void				trackCoin(std::string const & coinTrackerFile);
 		void				trackBelongings(std::string const & belongingsTrackerFile);
-		float				closestValue(Date it);
+		double				closestValue(Date it);
 
 		/* >------ Exceptions ------< */
 		class BitcoinException : public std::exception {
 			public:
-				BitcoinException(std::string const &type) throw() : _type(type) {}
+				BitcoinException(std::string const &type) throw() : _type(type), _message("[ERROR] " + type) {}
 				~BitcoinException() throw() {}
-				const char*	what() const throw() { return _type.c_str(); }
+				const char*	what() const throw() {
+					return _message.c_str();
+				}
 
 			private:
-				std::string _type;
+				std::string	_type;
+				std::string	_message;
 		};
 
 	private:
-		std::map<Date, float>	_coinTracker;
+		std::map<Date, double>	_coinTracker;
 		void build(	std::string const & coinTrackerFile,
 					std::string const & belongingsTrackerFile);
 };
