@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/12 19:56:41 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/14 15:25:23 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ void PmergeMe::printTimeSpent(double time, std::string containerName) {
 	std::cout << "Time to process a range of " << _size << "elements with "
 		<< containerName << " :  " << time << " us" << std::endl;
 }
+
+static int getJacobsthalElement(int index) {
+	switch (index) {
+		case 0:
+			return 0;
+		case 1:
+			return 1;
+		default:
+			return getJacobsthalElement(index - 1) + (2 * getJacobsthalElement(index - 2));
+	}
+}
 /* <----------------------------> */
 
 
@@ -40,10 +51,13 @@ void PmergeMe::addNumber(int number) {
 
 
 /* >----------- Sorting -----------< */
+/* >----------- List -----------< */
 void PmergeMe::sortList() {
 	
 }
+/* <----------------------------> */
 
+/* >----------- Vector -----------< */
 static void sortVectorPairs(std::vector<std::pair<int, int> > pairs) {
 	std::vector<std::pair<int, int> >::iterator it;
 	for (it = pairs.begin(); it < pairs.end(); ++it) {
@@ -138,6 +152,7 @@ void PmergeMe::sortVector() {
 		}
 	}
 }
+/* <----------------------------> */
 
 void PmergeMe::sortContainers() {
 	std::clock_t start, end;
