@@ -6,13 +6,14 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/14 15:25:23 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/14 16:51:11 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define NO_VALUE	-1
 #define FIRST		0
 #define SECOND		1
+#define DONE		1
 
 #include <ctime>
 #include <iostream>
@@ -131,24 +132,32 @@ void PmergeMe::sortVector() {
 	sortVectorPairs(pairs);
 
 	std::vector<int> s;
-	std::vector<int> p;
+	std::vector<std::pair<int, int> > p;
 
 	{
 		std::vector<std::pair<int, int> >::iterator it;
 		for (it = pairs.begin(); it < pairs.end(); ++it) {
 			s.push_back(it->second);
 			if (it->first != NO_VALUE)
-				p.push_back(it->first);
+				p.push_back(std::make_pair<int, int>(it->first, !DONE));
 		}
 	}
 
 	s = mergeInsertionSortVector(halfVector(s, FIRST), halfVector(s, SECOND));
 	int smallestElementOfS = s[0];
 	{
-		std::vector<std::pair<int, int> >::iterator it;
-		for (it = pairs.begin(); it < pairs.end(); ++it) {
-			if (it->second == smallestElementOfS)
-				s.insert(s.begin(), it->first);
+		std::vector<std::pair<int, int> >::iterator pairsIterator;
+		for (pairsIterator = pairs.begin(); pairsIterator < pairs.end(); ++pairsIterator) {
+			if (pairsIterator->second == smallestElementOfS) {
+				s.insert(s.begin(), pairsIterator->first);
+
+				std::vector<std::pair<int, int> >::iterator pIterator;
+				for (pIterator = p.begin(); pIterator < p.end(); ++pIterator) {
+					if (pIterator->first == pairsIterator->first)
+						pIterator->second = DONE;
+				}
+				break ;
+			}
 		}
 	}
 }
