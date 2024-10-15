@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/14 16:51:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/15 19:14:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void PmergeMe::printTimeSpent(double time, std::string containerName) {
 
 static int getJacobsthalElement(int index) {
 	switch (index) {
-		case 0:
+		case -2:
 			return 0;
-		case 1:
+		case -1:
 			return 1;
 		default:
 			return getJacobsthalElement(index - 1) + (2 * getJacobsthalElement(index - 2));
@@ -114,18 +114,23 @@ static std::vector<int> mergeInsertionSortVector(
 	return left;
 }
 
+static void insertLastNumbers(std::vector<int> s, std::vector<std::pair<int, int> > p) {
+	int i = 0;
+	while (getJacobsthalElement(i) <= p.size())
+}
+
 void PmergeMe::sortVector() {
 	std::vector<std::pair<int, int> > pairs;
 
 	{
 		std::vector<int>::iterator it;
 		for (it = _vector.begin(); it < _vector.end(); ++it) {
-			int previous = *it;
+			std::vector<int>::iterator previous = it;
 			if (++it == _vector.end()) {
-				pairs.push_back(std::make_pair<int, int>(previous, NO_VALUE));
-				break;	
+				pairs.push_back(std::make_pair<int, int>(*previous, NO_VALUE));
+				break;
 			}
-			pairs.push_back(std::make_pair<int, int>(previous, *it));
+			pairs.push_back(std::make_pair<int, int>(*previous, *it));
 		}
 	}
 
@@ -160,6 +165,8 @@ void PmergeMe::sortVector() {
 			}
 		}
 	}
+
+	insertLastNumbers(s, p);
 }
 /* <----------------------------> */
 
