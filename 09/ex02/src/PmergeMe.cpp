@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/15 19:14:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/17 20:31:22 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static std::vector<int> mergeInsertionSortVector(
 	for (rightIt = right.begin(); rightIt < right.end(); ++rightIt) {
 		std::vector<int>::iterator leftIt;
 		for (leftIt = left.begin(); leftIt < left.end(); ++leftIt) {
-			if (*rightIt < *leftIt) {
+			if (*rightIt <= *leftIt) {
 				left.insert(leftIt, *rightIt);
 				break;
 			}
@@ -114,9 +114,31 @@ static std::vector<int> mergeInsertionSortVector(
 	return left;
 }
 
+static void insert(std::vector<int> destination, int newElement) {
+	std::vector<int>::iterator it;
+	for (it = destination.begin(); it < destination.end(); ++it) {
+		if (newElement <= *it) {
+			destination.insert(it, newElement);
+			return ;
+		}
+	}
+	destination.push_back(newElement);
+}
+
 static void insertLastNumbers(std::vector<int> s, std::vector<std::pair<int, int> > p) {
-	int i = 0;
-	while (getJacobsthalElement(i) <= p.size())
+	int index = 0;
+	do {
+		index = getJacobsthalElement(index);
+
+		for (int i = index; i >= 0; --i) {
+			if (p.at(i).second != DONE) {
+				insert(s, p.at(i).first);
+				p.at(i).second = DONE;
+			}
+		}
+
+		index++;
+	} while (static_cast<std::vector<int>::size_type>(index) < p.size());
 }
 
 void PmergeMe::sortVector() {
@@ -167,20 +189,22 @@ void PmergeMe::sortVector() {
 	}
 
 	insertLastNumbers(s, p);
+	_vector = s;
 }
 /* <----------------------------> */
 
 void PmergeMe::sortContainers() {
-	std::clock_t start, end;
+	std::string containersNames[2] = { "std::list", "std::vector" };
+	void (PmergeMe::*sort[2])() = { &PmergeMe::sortList, &PmergeMe::sortVector };
 
-	start = std::clock();
-	sortList();
-	end = std::clock();
-	printTimeSpent(static_cast<double>(end - start), "std::list");
+	for (int i = 0; i < 2; ++i) {
+		std::clock_t start, end;
 
-	start = std::clock();
-	sortVector();
-	end = std::clock();
-	printTimeSpent(static_cast<double>(end - start), "std::vector");
+		start = std::clock();
+		(this->*sort[i])();
+		end = std::clock();
+
+		printTimeSpent(static_cast<double>(end - start), containersNames[i]);
+	}
 }
 /* <----------------------------> */
