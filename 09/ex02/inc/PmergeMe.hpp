@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:33 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/12 15:51:56 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:18:51 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <exception>
 # include <list>
+# include <string>
 # include <vector>
 
 class PmergeMe
@@ -33,6 +34,8 @@ class PmergeMe
 			_list = other._list;
 			_size = other._size;
 			_vector = other._vector;
+
+			return *this;
 		}
 
 		/* >------ Utils ------< */
