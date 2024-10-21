@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:05:46 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/24 16:30:02 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/21 23:00:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		Span::longestSpan() const {
 
 
 /* >----------- Set/Getters -----------< */
-void	Span::add(int value) {
+void	Span::addNumber(int value) {
 	if (_storage.size() == _maxSize)
 		throw std::exception();
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:59:40 by aautin            #+#    #+#             */
-/*   Updated: 2024/09/24 15:10:20 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/21 23:00:07 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class Span
 		int		longestSpan() const;
 
 		/* Set/Getters */
-		void	add(int value);
+		void	addNumber(int value);
 		int		getMaxSize() const;
 
 	private:
