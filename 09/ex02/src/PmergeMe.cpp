@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/21 17:19:16 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:31:39 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 /* >----------- Utils -----------< */
 void PmergeMe::printTimeSpent(double time, std::string containerName) {
 	std::cout << "Time to process a range of " << _size << " elements with "
-		<< containerName << " :  " << time << " us" << std::endl;
+		<< containerName << "\t: \t" << time << " us" << std::endl;
 }
 
 static int getJacobsthalElement(int index) {
@@ -329,25 +329,29 @@ void PmergeMe::sortContainers() {
 	std::string containersNames[2] = { "std::list", "std::vector" };
 	void (PmergeMe::*sort[2])() = { &PmergeMe::sortList, &PmergeMe::sortVector };
 
-	for (int i = 0; i < 2; ++i) {
-		std::clock_t start, end;
-
-		start = std::clock();
-		(this->*sort[i])();
-		end = std::clock();
-
-		printTimeSpent(static_cast<double>(end - start), containersNames[i]);
-	}
-
-	std::cout << "Vector" << std::endl;
+	std::cout << "Before\t: \t";
 	for (int i = 0; i < static_cast<int>(_vector.size()); ++i) {
-		std::cout << _vector.at(i) << " " << std::endl;
+		std::cout << _vector.at(i) << " ";
 	}
-	std::cout << "List" << std::endl;
+	std::cout << std::endl;
+
+	std::clock_t start[2], end[2];
+	for (int i = 0; i < 2; ++i) {
+
+		start[i] = std::clock();
+		(this->*sort[i])();
+		end[i] = std::clock();
+
+	}
+	std::cout << "After\t: \t";
 	std::list<int>::iterator it = _list.begin();
 	for (int i = 0; i < static_cast<int>(_list.size()); ++i) {
-		std::cout << *it << " " << std::endl;
+		std::cout << *it << " ";
 		std::advance(it, 1);
 	}
+	std::cout << std::endl;
+
+	printTimeSpent(static_cast<double>(end[0] - start[0]), containersNames[0]);
+	printTimeSpent(static_cast<double>(end[1] - start[1]), containersNames[1]);
 }
 /* <----------------------------> */
