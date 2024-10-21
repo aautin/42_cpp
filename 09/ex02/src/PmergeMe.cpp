@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:21:21 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/21 17:31:39 by aautin           ###   ########.fr       */
+/*   Updated: 2024/10/21 17:52:01 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,7 +339,8 @@ void PmergeMe::sortContainers() {
 	for (int i = 0; i < 2; ++i) {
 
 		start[i] = std::clock();
-		(this->*sort[i])();
+		if (_size > 1)
+			(this->*sort[i])();
 		end[i] = std::clock();
 
 	}
