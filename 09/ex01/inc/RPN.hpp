@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/09 17:17:11 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/02 20:18:21 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ class RPN
 			_numbers = other._numbers;
 			return *this;
 		}
+
+		int		getSize() { return _numbers.size(); }
 
 		/* >------ Operations ------< */
 		void	addNumber(double number);

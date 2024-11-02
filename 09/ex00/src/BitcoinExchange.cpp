@@ -6,12 +6,12 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/09 15:41:09 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/02 18:39:31 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define DATA_DEFAULT			"data.csv"
-#define INPUT_DEFAULT			"input"
+#define INPUT_DEFAULT			"input.txt"
 #define LEFT_NAME				"date"
 #define COIN_RIGHT_NAME			"exchange_rate"
 #define BELONGINGS_RIGHT_NAME	"value"
@@ -82,12 +82,12 @@ static double strToValue(std::string const & str) {
 	char *strPtr;
 	double value = strtod(str.c_str(), &strPtr);
 	if (*strPtr != '\0')
-		throw BitcoinExchange::BitcoinException(str + " : incorrect input");
+		throw BitcoinExchange::BitcoinException(str + " : bad input");
 
 	if (value < 0)
-		throw BitcoinExchange::BitcoinException(str + " : negative value");
+		throw BitcoinExchange::BitcoinException(str + " : not a positive number");
 
-	if (value > 1000.0)
+	if (value > 2147483647.0)
 		throw BitcoinExchange::BitcoinException(str + " : too large number");
 
 	return value;
@@ -148,7 +148,7 @@ void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 	for (it = content.begin(); it != content.end(); ++it) {
 		if (it->second.find(separator) == std::string::npos
 			|| it->second.find(separator) != it->second.rfind(separator))
-			throw BitcoinException(it->second + " : incorrect format");
+			throw BitcoinException(it->second + " : bad input");
 
 		std::string	left = it->second.substr(0, it->second.find(separator));
 		std::string	right = it->second.substr(it->second.find(separator) + separator.length(),
@@ -172,7 +172,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 		try {
 			if (it->second.find(separator) == std::string::npos
 				|| it->second.find(separator) != it->second.rfind(separator))
-				throw BitcoinException(it->second + " : incorrect format");
+				throw BitcoinException(it->second + " : bad input");
 
 			std::string	left = it->second.substr(0, it->second.find(separator));
 			std::string	right = it->second.substr(it->second.find(separator) + separator.length(),

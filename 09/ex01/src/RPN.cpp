@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/09 18:22:43 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/02 20:18:22 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ std::string doubleToString(double value) {
     return oss.str();
 }
 /* <----------------------------> */
+
 
 /* >----------- Operations -----------< */
 void	RPN::addNumber(double number) {

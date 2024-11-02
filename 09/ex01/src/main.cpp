@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aautin <aautin@student.42.fr >             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:51:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/09 18:32:08 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/02 20:18:58 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int main(int argc, char **argv) {
 
 			myOperation.addNumber(number);
 		}
+		if (myOperation.getSize() == 0)
+			throw RPN::Exception("no number");
 		std::cout << static_cast<int>(myOperation.getResult()) << std::endl;
 	}
 	catch (RPN::Exception const & e) {
