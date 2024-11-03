@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:51:16 by aautin            #+#    #+#             */
-/*   Updated: 2024/11/02 18:35:05 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/03 19:31:46 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 #include "BitcoinExchange.hpp"
 
-int main() {
+int main(int argc, char **argv) {
 
 	try {
-		BitcoinExchange("data.csv", "input.txt");
+		if (argc == 2)
+			BitcoinExchange(DATA_DEFAULT, argv[1]);
+		else
+			std::cout << "Wrong number of arguments" << std::endl;
 	}
 	catch (...) {
-		std::cout << "Exception caught" << std::endl;
+		std::cout << "Datafile of Inputfile isn't existing" << std::endl;
 	}
 
 	return 0;

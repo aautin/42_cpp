@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:10 by aautin            #+#    #+#             */
-/*   Updated: 2024/10/09 15:29:00 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/03 19:25:33 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 #ifndef BITCOIN_EXCHANGE_HPP
 # define BITCOIN_EXCHANGE_HPP
+
+# define DATA_DEFAULT	"data.csv"
+# define INPUT_DEFAULT	"input.txt"
 
 # include <exception>
 # include <string>

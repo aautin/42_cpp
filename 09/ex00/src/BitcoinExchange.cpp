@@ -6,12 +6,10 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/11/02 18:39:31 by aautin           ###   ########.fr       */
+/*   Updated: 2024/11/03 19:34:15 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DATA_DEFAULT			"data.csv"
-#define INPUT_DEFAULT			"input.txt"
 #define LEFT_NAME				"date"
 #define COIN_RIGHT_NAME			"exchange_rate"
 #define BELONGINGS_RIGHT_NAME	"value"
@@ -29,8 +27,11 @@
 static std::map<int, std::string> fileToMap(std::string const & file) {
 	std::map<int, std::string> fileContent;
 
-	std::fstream fileStream;
-	fileStream.open(file.c_str(), std::fstream::in);
+	std::ifstream fileStream;
+	fileStream.open(file.c_str(), std::ifstream::in);
+
+	if (fileStream.is_open() == false)
+		throw std::exception();
 
 	std::string	line;
 	int			key = 0;
@@ -78,7 +79,7 @@ static Date strToKey(std::string const & str) {
 	return Date(year, month, day);
 }
 
-static double strToValue(std::string const & str) {
+static double strToValue(std::string const & str, int isInput) {
 	char *strPtr;
 	double value = strtod(str.c_str(), &strPtr);
 	if (*strPtr != '\0')
@@ -87,7 +88,7 @@ static double strToValue(std::string const & str) {
 	if (value < 0)
 		throw BitcoinExchange::BitcoinException(str + " : not a positive number");
 
-	if (value > 2147483647.0)
+	if (isInput && value > 1000.0)
 		throw BitcoinExchange::BitcoinException(str + " : too large number");
 
 	return value;
@@ -155,7 +156,7 @@ void BitcoinExchange::trackCoin(std::string const & coinTrackerFile) {
 			it->second.length() - it->second.find(separator) + separator.length());
 
 		Date	key = strToKey(left);
-		double	value = strToValue(right);
+		double	value = strToValue(right, false);
 
 		_coinTracker.insert(std::make_pair(key, value));
 	}
@@ -179,7 +180,7 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 				it->second.length() - it->second.find(separator) + separator.length());
 
 			Date	key = strToKey(left);
-			double	value = strToValue(right);
+			double	value = strToValue(right, true);
 			double	exchangeRate = closestValue(key);
 
 			if (exchangeRate * value > std::numeric_limits<double>::max())
