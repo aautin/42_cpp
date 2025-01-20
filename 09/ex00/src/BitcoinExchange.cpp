@@ -6,7 +6,7 @@
 /*   By: aautin <aautin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:14:04 by aautin            #+#    #+#             */
-/*   Updated: 2024/11/03 19:34:15 by aautin           ###   ########.fr       */
+/*   Updated: 2025/01/20 18:18:43 by aautin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static Date strToKey(std::string const & str) {
 
 	if (year <= 0 || month <= 0 || day <= 0)
 		throw std::exception();
-	if (year > 2024 || month > 12 || day > 31)
+	if (month > 12 || day > 31)
 		throw BitcoinExchange::BitcoinException(str + " : invalid/unrealistic date");
 
 	return Date(year, month, day);
@@ -201,12 +201,16 @@ void BitcoinExchange::trackBelongings(std::string const & belongingsTrackerFile)
 }
 
 double BitcoinExchange::closestValue(Date it) {
+	try {
+		if (_coinTracker[it])
+			return _coinTracker[it]; 
+	} catch (...) {}
+
 	while (--it == true) {
 		try {
 			if (_coinTracker[it])
 				return _coinTracker[it]; 
-		}
-		catch (...) {}
+		} catch (...) {}
 	}
 	return _coinTracker.begin()->second;
 }
